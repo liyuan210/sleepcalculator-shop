@@ -1,0 +1,330 @@
+﻿<!DOCTYPE html>
+<html lang='zh-CN'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>睡眠工具箱 - 睡眠计算器</title>
+    <meta name='description' content='专业的睡眠工具集合，包括睡眠计算器、睡眠质量评估、睡眠时长统计等实用工具。'>
+    <link rel='stylesheet' href='../style.css'>
+    <style>
+        .tools-container {
+            max-width: 1200px;
+            margin: 120px auto 0;
+            padding: 0 20px;
+        }
+        .tools-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .tools-title {
+            color: #2d3748;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        .tool-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+        .tool-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .form-input, .form-select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .result-box {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class='navbar'>
+        <div class='nav-container'>
+            <div class='nav-logo'>
+                <h2><a href='../' style='text-decoration: none; color: #667eea;'> 睡眠计算器</a></h2>
+            </div>
+            <ul class='nav-menu'>
+                <li><a href='../'>首页</a></li>
+                <li><a href='./' class='active'>工具</a></li>
+                <li><a href='../blog/'>博客</a></li>
+                <li><a href='../about/'>关于</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class='tools-container'>
+        <div class='tools-header'>
+            <h1 class='tools-title'> 睡眠工具箱</h1>
+            <p>专业的睡眠工具集合，帮助您分析、改善和优化睡眠质量</p>
+        </div>
+
+        <div class='tools-grid'>
+            <!-- 睡眠时间计算器 -->
+            <div class='tool-card'>
+                <div style='font-size: 3rem; margin-bottom: 20px;'></div>
+                <h3>睡眠时间计算器</h3>
+                <p>基于90分钟睡眠周期，计算最佳起床时间，避免在深度睡眠中被唤醒</p>
+                
+                <select class='form-select' id='sleepMode'>
+                    <option value='now'>现在睡觉</option>
+                    <option value='custom'>自定义睡觉时间</option>
+                </select>
+                
+                <input type='time' class='form-input' id='sleepTime' style='display: none;'>
+                
+                <button class='tool-button' onclick='calculateSleepTime()'>计算最佳起床时间</button>
+                
+                <div class='result-box' id='sleepResult'>
+                    <div id='sleepTimes'></div>
+                </div>
+            </div>
+
+            <!-- 睡眠质量评估 -->
+            <div class='tool-card'>
+                <div style='font-size: 3rem; margin-bottom: 20px;'></div>
+                <h3>睡眠质量评估</h3>
+                <p>通过简单问卷评估您的睡眠质量，并获得个性化改善建议</p>
+                
+                <select class='form-select' id='fallAsleepTime'>
+                    <option value='15'>入睡用时：15分钟以内</option>
+                    <option value='30'>入睡用时：15-30分钟</option>
+                    <option value='45'>入睡用时：30-45分钟</option>
+                    <option value='60'>入睡用时：45分钟以上</option>
+                </select>
+                
+                <select class='form-select' id='nightWakeups'>
+                    <option value='0'>夜间醒来：从不醒来</option>
+                    <option value='1'>夜间醒来：1-2次</option>
+                    <option value='2'>夜间醒来：3-4次</option>
+                    <option value='3'>夜间醒来：5次以上</option>
+                </select>
+                
+                <select class='form-select' id='morningFeeling'>
+                    <option value='excellent'>晨起感受：精神饱满</option>
+                    <option value='good'>晨起感受：较好</option>
+                    <option value='fair'>晨起感受：一般</option>
+                    <option value='poor'>晨起感受：疲惫不堪</option>
+                </select>
+                
+                <button class='tool-button' onclick='assessSleepQuality()'>评估睡眠质量</button>
+                
+                <div class='result-box' id='qualityResult'>
+                    <div id='qualityScore'></div>
+                </div>
+            </div>
+
+            <!-- 睡眠时长计算器 -->
+            <div class='tool-card'>
+                <div style='font-size: 3rem; margin-bottom: 20px;'></div>
+                <h3>睡眠时长计算器</h3>
+                <p>计算实际睡眠时长，帮助您了解是否达到推荐的睡眠时间</p>
+                
+                <input type='time' class='form-input' id='bedTime' value='22:30' placeholder='睡觉时间'>
+                <input type='time' class='form-input' id='wakeTime' value='07:00' placeholder='起床时间'>
+                <input type='number' class='form-input' id='fallAsleepDuration' value='15' min='0' max='120' placeholder='入睡用时（分钟）'>
+                
+                <button class='tool-button' onclick='calculateSleepDuration()'>计算睡眠时长</button>
+                
+                <div class='result-box' id='durationResult'>
+                    <div id='durationStats'></div>
+                </div>
+            </div>
+
+            <!-- 睡眠环境检查 -->
+            <div class='tool-card'>
+                <div style='font-size: 3rem; margin-bottom: 20px;'></div>
+                <h3>睡眠环境检查</h3>
+                <p>评估您的睡眠环境是否达到最佳状态，获得改善建议</p>
+                
+                <select class='form-select' id='roomTemp'>
+                    <option value='low'>卧室温度：16C以下</option>
+                    <option value='optimal'>卧室温度：16-19C</option>
+                    <option value='high'>卧室温度：19C以上</option>
+                </select>
+                
+                <select class='form-select' id='noiseLevel'>
+                    <option value='quiet'>噪音水平：很安静</option>
+                    <option value='moderate'>噪音水平：偶有噪音</option>
+                    <option value='noisy'>噪音水平：经常有噪音</option>
+                </select>
+                
+                <select class='form-select' id='lightLevel'>
+                    <option value='dark'>光线情况：完全黑暗</option>
+                    <option value='dim'>光线情况：微弱光线</option>
+                    <option value='bright'>光线情况：有明亮光线</option>
+                </select>
+                
+                <button class='tool-button' onclick='checkEnvironment()'>检查睡眠环境</button>
+                
+                <div class='result-box' id='environmentResult'>
+                    <div id='environmentScore'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class='footer'>
+        <div class='container'>
+            <p>&copy; 2024 睡眠计算器. 帮助你获得更好的睡眠质量.</p>
+        </div>
+    </footer>
+
+    <script src='../script.js'></script>
+    <script>
+        // 睡眠模式切换
+        document.getElementById('sleepMode').addEventListener('change', function() {
+            const timeInput = document.getElementById('sleepTime');
+            timeInput.style.display = this.value === 'custom' ? 'block' : 'none';
+        });
+
+        // 计算睡眠时间
+        function calculateSleepTime() {
+            const mode = document.getElementById('sleepMode').value;
+            let bedTime;
+            
+            if (mode === 'now') {
+                bedTime = new Date();
+                bedTime.setMinutes(bedTime.getMinutes() + 15);
+            } else {
+                const timeInput = document.getElementById('sleepTime').value;
+                if (!timeInput) {
+                    alert('请选择睡觉时间');
+                    return;
+                }
+                const [hours, minutes] = timeInput.split(':');
+                bedTime = new Date();
+                bedTime.setHours(parseInt(hours), parseInt(minutes) + 15, 0, 0);
+            }
+            
+            let timesHtml = '<h4>推荐起床时间：</h4>';
+            for (let i = 1; i <= 6; i++) {
+                const wakeTime = new Date(bedTime.getTime() + (i * 90) * 60000);
+                const timeStr = wakeTime.toLocaleTimeString('zh-CN', {hour: '2-digit', minute: '2-digit'});
+                const isRecommended = i === 6;
+                timesHtml += '<div style=\"padding: 10px; margin: 5px 0; background: ' + (isRecommended ? '#f0fff4' : '#fff') + '; border-radius: 8px; border: 2px solid ' + (isRecommended ? '#48bb78' : '#e2e8f0') + ';\"><strong>' + timeStr + '</strong> (' + (i * 1.5) + '小时)' + (isRecommended ? ' <span style=\"color: #48bb78;\">推荐</span>' : '') + '</div>';
+            }
+            
+            document.getElementById('sleepTimes').innerHTML = timesHtml;
+            document.getElementById('sleepResult').style.display = 'block';
+        }
+
+        // 评估睡眠质量
+        function assessSleepQuality() {
+            const fallAsleep = parseInt(document.getElementById('fallAsleepTime').value);
+            const wakeups = parseInt(document.getElementById('nightWakeups').value);
+            const feeling = document.getElementById('morningFeeling').value;
+            
+            let score = 100;
+            if (fallAsleep > 15) score -= (fallAsleep - 15);
+            score -= wakeups * 15;
+            
+            switch(feeling) {
+                case 'good': score -= 10; break;
+                case 'fair': score -= 20; break;
+                case 'poor': score -= 30; break;
+            }
+            
+            score = Math.max(0, score);
+            
+            let level = score >= 85 ? '优秀' : score >= 70 ? '良好' : score >= 55 ? '一般' : '较差';
+            let advice = score >= 85 ? '您的睡眠质量很好！' : score >= 70 ? '睡眠质量不错，可以进一步提升。' : score >= 55 ? '有改善空间，建议调整作息。' : '建议咨询医生，改善睡眠习惯。';
+            
+            document.getElementById('qualityScore').innerHTML = '<h4>睡眠质量：' + level + ' (' + score + '分)</h4><p>' + advice + '</p>';
+            document.getElementById('qualityResult').style.display = 'block';
+        }
+
+        // 计算睡眠时长
+        function calculateSleepDuration() {
+            const bedTime = document.getElementById('bedTime').value;
+            const wakeTime = document.getElementById('wakeTime').value;
+            const fallAsleepDuration = parseInt(document.getElementById('fallAsleepDuration').value);
+            
+            if (!bedTime || !wakeTime) {
+                alert('请输入完整的时间信息');
+                return;
+            }
+            
+            const [bedHours, bedMinutes] = bedTime.split(':').map(Number);
+            const [wakeHours, wakeMinutes] = wakeTime.split(':').map(Number);
+            
+            let bedDateTime = new Date();
+            bedDateTime.setHours(bedHours, bedMinutes, 0, 0);
+            
+            let wakeDateTime = new Date();
+            wakeDateTime.setHours(wakeHours, wakeMinutes, 0, 0);
+            
+            if (wakeDateTime < bedDateTime) {
+                wakeDateTime.setDate(wakeDateTime.getDate() + 1);
+            }
+            
+            const totalMinutes = (wakeDateTime - bedDateTime) / (1000 * 60);
+            const actualSleepMinutes = totalMinutes - fallAsleepDuration;
+            
+            const hours = Math.floor(actualSleepMinutes / 60);
+            const minutes = actualSleepMinutes % 60;
+            
+            let evaluation = actualSleepMinutes >= 420 && actualSleepMinutes <= 540 ? '理想的睡眠时长！' : actualSleepMinutes >= 360 ? '睡眠时长可以接受。' : '睡眠时长不足。';
+            
+            document.getElementById('durationStats').innerHTML = '<h4>睡眠统计</h4><p><strong>总共在床时间：</strong>' + Math.floor(totalMinutes / 60) + '小时' + (totalMinutes % 60) + '分钟<br><strong>实际睡眠时间：</strong>' + hours + '小时' + minutes + '分钟<br><strong>评估：</strong>' + evaluation + '</p>';
+            document.getElementById('durationResult').style.display = 'block';
+        }
+
+        // 检查睡眠环境
+        function checkEnvironment() {
+            const temp = document.getElementById('roomTemp').value;
+            const noise = document.getElementById('noiseLevel').value;
+            const light = document.getElementById('lightLevel').value;
+            
+            let score = 0;
+            let suggestions = [];
+            
+            if (temp === 'optimal') score += 33;
+            else suggestions.push('调整室温至16-19C');
+            
+            if (noise === 'quiet') score += 33;
+            else suggestions.push('减少噪音干扰');
+            
+            if (light === 'dark') score += 34;
+            else suggestions.push('使用遮光窗帘');
+            
+            let level = score >= 90 ? '优秀' : score >= 70 ? '良好' : score >= 50 ? '一般' : '需要改善';
+            
+            let resultHtml = '<h4>环境评分：' + level + ' (' + score + '分)</h4>';
+            if (suggestions.length > 0) {
+                resultHtml += '<p><strong>改善建议：</strong><br> ' + suggestions.join('<br> ') + '</p>';
+            }
+            
+            document.getElementById('environmentScore').innerHTML = resultHtml;
+            document.getElementById('environmentResult').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
