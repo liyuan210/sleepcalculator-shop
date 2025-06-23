@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>睡眠计算器 - 优化你的睡眠质量</title>
+    <meta name="description" content="基于90分钟睡眠周期的科学睡眠计算器，帮助你找到最佳起床时间，提升睡眠质量。">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>💤 睡眠计算器</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">首页</a></li>
+                <li><a href="tools/">工具</a></li>
+                <li><a href="blog/">博客</a></li>
+                <li><a href="about/">关于</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main>
+        <!-- 英雄区域 -->
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>🌙 优化你的睡眠质量</h1>
+                <p class="hero-subtitle">基于科学的90分钟睡眠周期，找到最佳起床时间</p>
+                <a href="#calculator" class="cta-button">开始计算</a>
+            </div>
+        </section>
+
+        <!-- 睡眠知识卡片 -->
+        <section class="info-section">
+            <div class="container">
+                <div class="info-card">
+                    <h3>📚 睡眠科学</h3>
+                    <ul>
+                        <li>你需要大约 15 分钟来入睡，这已经在计算中考虑了</li>
+                        <li>每个睡眠周期约为 90 分钟</li>
+                        <li>在睡眠周期结束时醒来会感觉更清醒</li>
+                        <li>建议在最后一个时间点醒来效果最佳</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 睡眠计算器 -->
+        <section id="calculator" class="calculator-section">
+            <div class="container">
+                <h2>睡眠时间计算器</h2>
+                
+                <div class="calculator">
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="now">现在睡觉</button>
+                        <button class="tab-btn" data-tab="custom">自定义时间</button>
+                    </div>
+
+                    <!-- 现在睡觉 -->
+                    <div class="tab-content active" id="now">
+                        <div class="current-time">
+                            <h3>当前时间：<span id="current-time-display"></span></h3>
+                            <p>如果你现在上床睡觉，最佳起床时间是：</p>
+                        </div>
+                        <button class="calculate-btn" onclick="calculateFromNow()">计算最佳起床时间</button>
+                        <div class="results" id="now-results"></div>
+                    </div>
+
+                    <!-- 自定义时间 -->
+                    <div class="tab-content" id="custom">
+                        <div class="input-group">
+                            <label for="bedtime">睡觉时间：</label>
+                            <input type="time" id="bedtime" value="23:00">
+                        </div>
+                        <button class="calculate-btn" onclick="calculateFromCustom()">计算最佳起床时间</button>
+                        <div class="results" id="custom-results"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 额外建议 -->
+        <section class="tips-section">
+            <div class="container">
+                <div class="tips">
+                    <h3>💡 额外建议</h3>
+                    <p>冷水澡和一杯咖啡也会给你额外的清醒感觉！</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 博客预览 -->
+        <section class="blog-preview">
+            <div class="container">
+                <h2>最新文章</h2>
+                <div class="blog-grid">
+                    <article class="blog-card">
+                        <h3>90分钟睡眠周期的科学原理</h3>
+                        <p>了解为什么90分钟是一个完整的睡眠周期...</p>
+                        <a href="blog/sleep-cycle-science.html">阅读更多</a>
+                    </article>
+                    <article class="blog-card">
+                        <h3>如何改善睡眠质量</h3>
+                        <p>10个简单实用的方法帮你睡得更好...</p>
+                        <a href="blog/improve-sleep-quality.html">阅读更多</a>
+                    </article>
+                    <article class="blog-card">
+                        <h3>睡前习惯的重要性</h3>
+                        <p>建立良好的睡前例行程序...</p>
+                        <a href="blog/bedtime-routine.html">阅读更多</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 睡眠计算器. 帮助你获得更好的睡眠质量.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

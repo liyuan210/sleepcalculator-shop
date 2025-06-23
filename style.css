@@ -1,0 +1,436 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 导航栏 */
+.navbar {
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.nav-logo h2 {
+    color: #667eea;
+    font-size: 1.5rem;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: #667eea;
+}
+
+/* 英雄区域 */
+.hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    padding: 150px 0 100px;
+    margin-top: 70px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.cta-button {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    border: 2px solid rgba(255,255,255,0.3);
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+}
+
+/* 区域通用样式 */
+.info-section, .calculator-section, .tips-section, .blog-preview {
+    padding: 80px 0;
+}
+
+.calculator-section {
+    background: #f8fafc;
+}
+
+.blog-preview {
+    background: #fff;
+}
+
+/* 信息卡片 */
+.info-card, .calculator, .tips {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.info-card h3, .tips h3 {
+    color: #4a5568;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.info-card ul {
+    list-style: none;
+}
+
+.info-card li {
+    padding: 10px 0;
+    padding-left: 30px;
+    position: relative;
+    color: #718096;
+    line-height: 1.6;
+}
+
+.info-card li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #38b2ac;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* 计算器样式 */
+.calculator-section h2 {
+    text-align: center;
+    color: #4a5568;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #f7fafc;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 15px 20px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    color: #718096;
+}
+
+.tab-btn.active {
+    background: #667eea;
+    color: white;
+}
+
+.tab-btn:hover {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.tab-btn.active:hover {
+    background: #5a67d8;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.current-time {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 25px;
+    background: #f7fafc;
+    border-radius: 10px;
+}
+
+.current-time h3 {
+    color: #4a5568;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.current-time span {
+    color: #667eea;
+    font-weight: bold;
+}
+
+.input-group {
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #4a5568;
+    font-size: 1.1rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    transition: border-color 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.calculate-btn {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+}
+
+.calculate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+}
+
+.results {
+    margin-top: 30px;
+}
+
+.results h4 {
+    color: #4a5568;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.result-item {
+    background: #f7fafc;
+    border-left: 4px solid #667eea;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 0 10px 10px 0;
+    transition: all 0.3s ease;
+}
+
+.result-item:hover {
+    background: #edf2f7;
+    transform: translateX(5px);
+}
+
+.result-item.recommended {
+    background: #e6fffa;
+    border-left-color: #38b2ac;
+    box-shadow: 0 5px 15px rgba(56, 178, 172, 0.1);
+    position: relative;
+}
+
+.result-item.recommended::after {
+    content: '⭐ 推荐';
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #38b2ac;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.result-time {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 5px;
+}
+
+.result-cycles {
+    font-size: 1rem;
+    color: #718096;
+}
+
+/* 建议区域 */
+.tips {
+    text-align: center;
+    background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%);
+}
+
+.tips p {
+    color: #2d3748;
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+/* 博客预览 */
+.blog-preview h2 {
+    text-align: center;
+    color: #4a5568;
+    margin-bottom: 50px;
+    font-size: 2.5rem;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.blog-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+}
+
+.blog-card h3 {
+    color: #4a5568;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.blog-card p {
+    color: #718096;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.blog-card a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.blog-card a:hover {
+    color: #5a67d8;
+}
+
+/* 页脚 */
+.footer {
+    background: #2d3748;
+    color: white;
+    text-align: center;
+    padding: 40px 0;
+}
+
+.footer p {
+    opacity: 0.8;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .tabs {
+        flex-direction: column;
+    }
+    
+    .tab-btn:first-child {
+        border-radius: 10px 10px 0 0;
+    }
+    
+    .tab-btn:last-child {
+        border-radius: 0 0 10px 10px;
+    }
+    
+    .result-item {
+        padding: 15px;
+    }
+    
+    .result-item.recommended::after {
+        position: static;
+        display: block;
+        margin-top: 10px;
+        text-align: center;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+}
+
+/* 滚动行为 */
+html {
+    scroll-behavior: smooth;
+} 
