@@ -205,13 +205,13 @@
 
     <script src='../script.js'></script>
     <script>
-        // 睡眠模式切换
+        // Sleep mode toggle
         document.getElementById('sleepMode').addEventListener('change', function() {
             const timeInput = document.getElementById('sleepTime');
             timeInput.style.display = this.value === 'custom' ? 'block' : 'none';
         });
 
-        // 计算睡眠时间
+        // Calculate sleep time
         function calculateSleepTime() {
             const mode = document.getElementById('sleepMode').value;
             let bedTime;
@@ -222,7 +222,7 @@
             } else {
                 const timeInput = document.getElementById('sleepTime').value;
                 if (!timeInput) {
-                    alert('请选择睡觉时间');
+                    alert('Please select a bedtime');
                     return;
                 }
                 const [hours, minutes] = timeInput.split(':');
@@ -230,19 +230,19 @@
                 bedTime.setHours(parseInt(hours), parseInt(minutes) + 15, 0, 0);
             }
             
-            let timesHtml = '<h4>推荐起床时间：</h4>';
+            let timesHtml = '<h4>Recommended Wake-up Times:</h4>';
             for (let i = 1; i <= 6; i++) {
                 const wakeTime = new Date(bedTime.getTime() + (i * 90) * 60000);
-                const timeStr = wakeTime.toLocaleTimeString('zh-CN', {hour: '2-digit', minute: '2-digit'});
+                const timeStr = wakeTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: false});
                 const isRecommended = i === 6;
-                timesHtml += '<div style=\"padding: 10px; margin: 5px 0; background: ' + (isRecommended ? '#f0fff4' : '#fff') + '; border-radius: 8px; border: 2px solid ' + (isRecommended ? '#48bb78' : '#e2e8f0') + ';\"><strong>' + timeStr + '</strong> (' + (i * 1.5) + '小时)' + (isRecommended ? ' <span style=\"color: #48bb78;\">推荐</span>' : '') + '</div>';
+                timesHtml += '<div style=\"padding: 10px; margin: 5px 0; background: ' + (isRecommended ? '#f0fff4' : '#fff') + '; border-radius: 8px; border: 2px solid ' + (isRecommended ? '#48bb78' : '#e2e8f0') + ';\"><strong>' + timeStr + '</strong> (' + (i * 1.5) + ' hours)' + (isRecommended ? ' <span style=\"color: #48bb78;\">Recommended</span>' : '') + '</div>';
             }
             
             document.getElementById('sleepTimes').innerHTML = timesHtml;
             document.getElementById('sleepResult').style.display = 'block';
         }
 
-        // 评估睡眠质量
+        // Assess sleep quality
         function assessSleepQuality() {
             const fallAsleep = parseInt(document.getElementById('fallAsleepTime').value);
             const wakeups = parseInt(document.getElementById('nightWakeups').value);
@@ -260,21 +260,21 @@
             
             score = Math.max(0, score);
             
-            let level = score >= 85 ? '优秀' : score >= 70 ? '良好' : score >= 55 ? '一般' : '较差';
-            let advice = score >= 85 ? '您的睡眠质量很好！' : score >= 70 ? '睡眠质量不错，可以进一步提升。' : score >= 55 ? '有改善空间，建议调整作息。' : '建议咨询医生，改善睡眠习惯。';
+            let level = score >= 85 ? 'Excellent' : score >= 70 ? 'Good' : score >= 55 ? 'Fair' : 'Poor';
+            let advice = score >= 85 ? 'Your sleep quality is excellent!' : score >= 70 ? 'Good sleep quality, with room for improvement.' : score >= 55 ? 'There\\'s room for improvement. Consider adjusting your sleep routine.' : 'We recommend consulting a doctor to improve your sleep habits.';
             
-            document.getElementById('qualityScore').innerHTML = '<h4>睡眠质量：' + level + ' (' + score + '分)</h4><p>' + advice + '</p>';
+            document.getElementById('qualityScore').innerHTML = '<h4>Sleep Quality: ' + level + ' (' + score + ' points)</h4><p>' + advice + '</p>';
             document.getElementById('qualityResult').style.display = 'block';
         }
 
-        // 计算睡眠时长
+        // Calculate sleep duration
         function calculateSleepDuration() {
             const bedTime = document.getElementById('bedTime').value;
             const wakeTime = document.getElementById('wakeTime').value;
             const fallAsleepDuration = parseInt(document.getElementById('fallAsleepDuration').value);
             
             if (!bedTime || !wakeTime) {
-                alert('请输入完整的时间信息');
+                alert('Please enter complete time information');
                 return;
             }
             
@@ -297,13 +297,13 @@
             const hours = Math.floor(actualSleepMinutes / 60);
             const minutes = actualSleepMinutes % 60;
             
-            let evaluation = actualSleepMinutes >= 420 && actualSleepMinutes <= 540 ? '理想的睡眠时长！' : actualSleepMinutes >= 360 ? '睡眠时长可以接受。' : '睡眠时长不足。';
+            let evaluation = actualSleepMinutes >= 420 && actualSleepMinutes <= 540 ? 'Ideal sleep duration!' : actualSleepMinutes >= 360 ? 'Acceptable sleep duration.' : 'Insufficient sleep duration.';
             
-            document.getElementById('durationStats').innerHTML = '<h4>睡眠统计</h4><p><strong>总共在床时间：</strong>' + Math.floor(totalMinutes / 60) + '小时' + (totalMinutes % 60) + '分钟<br><strong>实际睡眠时间：</strong>' + hours + '小时' + minutes + '分钟<br><strong>评估：</strong>' + evaluation + '</p>';
+            document.getElementById('durationStats').innerHTML = '<h4>Sleep Statistics</h4><p><strong>Total time in bed:</strong> ' + Math.floor(totalMinutes / 60) + ' hours ' + (totalMinutes % 60) + ' minutes<br><strong>Actual sleep time:</strong> ' + hours + ' hours ' + minutes + ' minutes<br><strong>Assessment:</strong> ' + evaluation + '</p>';
             document.getElementById('durationResult').style.display = 'block';
         }
 
-        // 检查睡眠环境
+        // Check sleep environment
         function checkEnvironment() {
             const temp = document.getElementById('roomTemp').value;
             const noise = document.getElementById('noiseLevel').value;
@@ -313,19 +313,19 @@
             let suggestions = [];
             
             if (temp === 'optimal') score += 33;
-            else suggestions.push('调整室温至18-22C');
+            else suggestions.push('Adjust room temperature to 18-22°C');
             
             if (noise === 'quiet') score += 33;
-            else suggestions.push('减少噪音干扰');
+            else suggestions.push('Reduce noise interference');
             
             if (light === 'dark') score += 34;
-            else suggestions.push('使用遮光窗帘');
+            else suggestions.push('Use blackout curtains');
             
-            let level = score >= 90 ? '优秀' : score >= 70 ? '良好' : score >= 50 ? '一般' : '需要改善';
+            let level = score >= 90 ? 'Excellent' : score >= 70 ? 'Good' : score >= 50 ? 'Fair' : 'Needs Improvement';
             
-            let resultHtml = '<h4>环境评分：' + level + ' (' + score + '分)</h4>';
+            let resultHtml = '<h4>Environment Score: ' + level + ' (' + score + ' points)</h4>';
             if (suggestions.length > 0) {
-                resultHtml += '<p><strong>Improvement suggestions:</strong><br>• ' + suggestions.join('<br>• ') + '</p>';
+                resultHtml += '<p><strong>Improvement Suggestions:</strong><br>• ' + suggestions.join('<br>• ') + '</p>';
             }
             
             document.getElementById('environmentScore').innerHTML = resultHtml;
