@@ -1,10 +1,10 @@
 ﻿<!DOCTYPE html>
-<html lang='zh-CN'>
+<html lang='en'>
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>睡眠工具箱 - 睡眠计算器</title>
-    <meta name='description' content='专业的睡眠工具集合，包括睡眠计算器、睡眠质量评估、睡眠时长统计等实用工具。'>
+    <title>Sleep Toolkit - Sleep Calculator</title>
+    <meta name='description' content='Professional sleep tool collection including sleep calculator, sleep quality assessment, sleep duration statistics and other practical tools.'>
     <link rel='stylesheet' href='../style.css'>
     <style>
         .tools-container {
@@ -69,120 +69,125 @@
     <nav class='navbar'>
         <div class='nav-container'>
             <div class='nav-logo'>
-                <h2><a href='../' style='text-decoration: none; color: #667eea;'> 睡眠计算器</a></h2>
+                <h2><a href='../' style='text-decoration: none; color: #667eea;'>💤 Sleep Calculator</a></h2>
             </div>
+            <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <ul class='nav-menu'>
-                <li><a href='../'>首页</a></li>
-                <li><a href='./' class='active'>工具</a></li>
-                <li><a href='../blog/'>博客</a></li>
-                <li><a href='../about/'>关于</a></li>
+                <li><a href='../'>Home</a></li>
+                <li><a href='./' class='active'>Tools</a></li>
+                <li><a href='../blog/'>Blog</a></li>
+                <li><a href='../about/'>About</a></li>
             </ul>
         </div>
     </nav>
 
     <div class='tools-container'>
         <div class='tools-header'>
-            <h1 class='tools-title'> 睡眠工具箱</h1>
-            <p>专业的睡眠工具集合，帮助您分析、改善和优化睡眠质量</p>
+            <h1 class='tools-title'>💤 Sleep Toolkit</h1>
+            <p>Professional sleep tool collection to help you analyze, improve and optimize your sleep quality</p>
         </div>
 
         <div class='tools-grid'>
-            <!-- 睡眠时间计算器 -->
+            <!-- Sleep Time Calculator -->
             <div class='tool-card'>
-                <div style='font-size: 3rem; margin-bottom: 20px;'></div>
-                <h3>睡眠时间计算器</h3>
-                <p>基于90分钟睡眠周期，计算最佳起床时间，避免在深度睡眠中被唤醒</p>
+                <div style='font-size: 3rem; margin-bottom: 20px;'>🕐</div>
+                <h3>Sleep Time Calculator</h3>
+                <p>Based on 90-minute sleep cycles, calculate optimal wake-up times to avoid being awakened during deep sleep</p>
                 
                 <select class='form-select' id='sleepMode'>
-                    <option value='now'>现在睡觉</option>
-                    <option value='custom'>自定义睡觉时间</option>
+                    <option value='now'>Sleep Now</option>
+                    <option value='custom'>Custom Bedtime</option>
                 </select>
                 
                 <input type='time' class='form-input' id='sleepTime' style='display: none;'>
                 
-                <button class='tool-button' onclick='calculateSleepTime()'>计算最佳起床时间</button>
+                <button class='tool-button' onclick='calculateSleepTime()'>Calculate Optimal Wake-up Time</button>
                 
                 <div class='result-box' id='sleepResult'>
                     <div id='sleepTimes'></div>
                 </div>
             </div>
 
-            <!-- 睡眠质量评估 -->
+            <!-- Sleep Quality Assessment -->
             <div class='tool-card'>
-                <div style='font-size: 3rem; margin-bottom: 20px;'></div>
-                <h3>睡眠质量评估</h3>
-                <p>通过简单问卷评估您的睡眠质量，并获得个性化改善建议</p>
+                <div style='font-size: 3rem; margin-bottom: 20px;'>📊</div>
+                <h3>Sleep Quality Assessment</h3>
+                <p>Assess your sleep quality through a simple questionnaire and receive personalized improvement suggestions</p>
                 
                 <select class='form-select' id='fallAsleepTime'>
-                    <option value='15'>入睡用时：15分钟以内</option>
-                    <option value='30'>入睡用时：15-30分钟</option>
-                    <option value='45'>入睡用时：30-45分钟</option>
-                    <option value='60'>入睡用时：45分钟以上</option>
+                    <option value='15'>Time to fall asleep: Within 15 minutes</option>
+                    <option value='30'>Time to fall asleep: 15-30 minutes</option>
+                    <option value='45'>Time to fall asleep: 30-45 minutes</option>
+                    <option value='60'>Time to fall asleep: Over 45 minutes</option>
                 </select>
                 
                 <select class='form-select' id='nightWakeups'>
-                    <option value='0'>夜间醒来：从不醒来</option>
-                    <option value='1'>夜间醒来：1-2次</option>
-                    <option value='2'>夜间醒来：3-4次</option>
-                    <option value='3'>夜间醒来：5次以上</option>
+                    <option value='0'>Night awakenings: Never wake up</option>
+                    <option value='1'>Night awakenings: 1-2 times</option>
+                    <option value='2'>Night awakenings: 3-4 times</option>
+                    <option value='3'>Night awakenings: 5+ times</option>
                 </select>
                 
                 <select class='form-select' id='morningFeeling'>
-                    <option value='excellent'>晨起感受：精神饱满</option>
-                    <option value='good'>晨起感受：较好</option>
-                    <option value='fair'>晨起感受：一般</option>
-                    <option value='poor'>晨起感受：疲惫不堪</option>
+                    <option value='excellent'>Morning feeling: Refreshed and energetic</option>
+                    <option value='good'>Morning feeling: Pretty good</option>
+                    <option value='fair'>Morning feeling: Average</option>
+                    <option value='poor'>Morning feeling: Exhausted</option>
                 </select>
                 
-                <button class='tool-button' onclick='assessSleepQuality()'>评估睡眠质量</button>
+                <button class='tool-button' onclick='assessSleepQuality()'>Assess Sleep Quality</button>
                 
                 <div class='result-box' id='qualityResult'>
                     <div id='qualityScore'></div>
                 </div>
             </div>
 
-            <!-- 睡眠时长计算器 -->
+            <!-- Sleep Duration Calculator -->
             <div class='tool-card'>
-                <div style='font-size: 3rem; margin-bottom: 20px;'></div>
-                <h3>睡眠时长计算器</h3>
-                <p>计算实际睡眠时长，帮助您了解是否达到推荐的睡眠时间</p>
+                <div style='font-size: 3rem; margin-bottom: 20px;'>⏰</div>
+                <h3>Sleep Duration Calculator</h3>
+                <p>Calculate actual sleep duration to help you understand if you're meeting recommended sleep time</p>
                 
-                <input type='time' class='form-input' id='bedTime' value='22:30' placeholder='睡觉时间'>
-                <input type='time' class='form-input' id='wakeTime' value='07:00' placeholder='起床时间'>
-                <input type='number' class='form-input' id='fallAsleepDuration' value='15' min='0' max='120' placeholder='入睡用时（分钟）'>
+                <input type='time' class='form-input' id='bedTime' value='22:30' placeholder='Bedtime'>
+                <input type='time' class='form-input' id='wakeTime' value='07:00' placeholder='Wake-up time'>
+                <input type='number' class='form-input' id='fallAsleepDuration' value='15' min='0' max='120' placeholder='Time to fall asleep (minutes)'>
                 
-                <button class='tool-button' onclick='calculateSleepDuration()'>计算睡眠时长</button>
+                <button class='tool-button' onclick='calculateSleepDuration()'>Calculate Sleep Duration</button>
                 
                 <div class='result-box' id='durationResult'>
                     <div id='durationStats'></div>
                 </div>
             </div>
 
-            <!-- 睡眠环境检查 -->
+            <!-- Sleep Environment Check -->
             <div class='tool-card'>
-                <div style='font-size: 3rem; margin-bottom: 20px;'></div>
-                <h3>睡眠环境检查</h3>
-                <p>评估您的睡眠环境是否达到最佳状态，获得改善建议</p>
+                <div style='font-size: 3rem; margin-bottom: 20px;'>🏠</div>
+                <h3>Sleep Environment Check</h3>
+                <p>Assess whether your sleep environment is optimal and receive improvement suggestions</p>
                 
                 <select class='form-select' id='roomTemp'>
-                    <option value='low'>卧室温度：18C以下</option>
-                    <option value='optimal'>卧室温度：18-22C</option>
-                    <option value='high'>卧室温度：22C以上</option>
+                    <option value='low'>Room temperature: Below 18°C</option>
+                    <option value='optimal'>Room temperature: 18-22°C</option>
+                    <option value='high'>Room temperature: Above 22°C</option>
                 </select>
                 
                 <select class='form-select' id='noiseLevel'>
-                    <option value='quiet'>噪音水平：很安静</option>
-                    <option value='moderate'>噪音水平：偶有噪音</option>
-                    <option value='noisy'>噪音水平：经常有噪音</option>
+                    <option value='quiet'>Noise level: Very quiet</option>
+                    <option value='moderate'>Noise level: Occasional noise</option>
+                    <option value='noisy'>Noise level: Frequent noise</option>
                 </select>
                 
                 <select class='form-select' id='lightLevel'>
-                    <option value='dark'>光线情况：完全黑暗</option>
-                    <option value='dim'>光线情况：微弱光线</option>
-                    <option value='bright'>光线情况：有明亮光线</option>
+                    <option value='dark'>Light conditions: Completely dark</option>
+                    <option value='dim'>Light conditions: Dim light</option>
+                    <option value='bright'>Light conditions: Bright light</option>
                 </select>
                 
-                <button class='tool-button' onclick='checkEnvironment()'>检查睡眠环境</button>
+                <button class='tool-button' onclick='checkEnvironment()'>Check Sleep Environment</button>
                 
                 <div class='result-box' id='environmentResult'>
                     <div id='environmentScore'></div>
@@ -194,10 +199,10 @@
     <footer class='footer'>
         <div class='container'>
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-                <p>&copy; 2024 睡眠计算器. 保留所有权利.</p>
+                <p>&copy; 2024 💤 Sleep Calculator. All rights reserved.</p>
                 <div style="display: flex; gap: 20px; margin-top: 10px;">
-                    <a href="../privacy.html" style="color: #718096; text-decoration: none;">隐私政策</a>
-                    <a href="../terms.html" style="color: #718096; text-decoration: none;">服务条款</a>
+                    <a href="../privacy.html" style="color: #718096; text-decoration: none;">Privacy Policy</a>
+                    <a href="../terms.html" style="color: #718096; text-decoration: none;">Terms of Service</a>
                 </div>
             </div>
         </div>
