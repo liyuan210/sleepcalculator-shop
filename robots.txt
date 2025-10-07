@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://yourdomain.com/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Block access to sensitive files
+Disallow: /admin/
+Disallow: /*.log$
+Disallow: /temp/
+Disallow: /cache/

@@ -325,7 +325,7 @@
             
             let resultHtml = '<h4>环境评分：' + level + ' (' + score + '分)</h4>';
             if (suggestions.length > 0) {
-                resultHtml += '<p><strong>改善建议：</strong><br> ' + suggestions.join('<br> ') + '</p>';
+                resultHtml += '<p><strong>Improvement suggestions:</strong><br>• ' + suggestions.join('<br>• ') + '</p>';
             }
             
             document.getElementById('environmentScore').innerHTML = resultHtml;

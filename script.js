@@ -1,18 +1,19 @@
-// 睡眠计算器 JavaScript 代码
-// 基于 90 分钟睡眠周期算法
+// Sleep Calculator JavaScript Code
+// Based on 90-minute sleep cycle algorithm
 
-// 页面加载完成后执行
+// Execute after page loads
 document.addEventListener('DOMContentLoaded', function() {
     updateCurrentTime();
-    setInterval(updateCurrentTime, 1000); // 每秒更新时间
+    setInterval(updateCurrentTime, 1000); // Update time every second
     setupTabs();
     setupSmoothScroll();
+    setupMobileMenu();
 });
 
-// 更新当前时间显示
+// Update current time display
 function updateCurrentTime() {
     const now = new Date();
-    const timeString = now.toLocaleTimeString('zh-CN', { 
+    const timeString = now.toLocaleTimeString('en-US', { 
         hour: '2-digit', 
         minute: '2-digit',
         hour12: false 
@@ -23,7 +24,7 @@ function updateCurrentTime() {
     }
 }
 
-// 设置标签页切换功能
+// Setup tab switching functionality
 function setupTabs() {
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
@@ -32,20 +33,20 @@ function setupTabs() {
         btn.addEventListener('click', () => {
             const targetTab = btn.getAttribute('data-tab');
             
-            // 移除所有活动状态
+            // Remove all active states
             tabBtns.forEach(b => b.classList.remove('active'));
             tabContents.forEach(c => c.classList.remove('active'));
             
-            // 添加活动状态
+            // Add active state
             btn.classList.add('active');
             document.getElementById(targetTab).classList.add('active');
         });
     });
 }
 
-// 设置平滑滚动
+// Setup smooth scrolling
 function setupSmoothScroll() {
-    // 处理导航链接的平滑滚动
+    // Handle smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -60,7 +61,7 @@ function setupSmoothScroll() {
     });
 }
 
-// 从当前时间计算最佳起床时间
+// Calculate optimal wake-up time from current time
 function calculateFromNow() {
     const now = new Date();
     const hour = now.getHours();
@@ -69,11 +70,11 @@ function calculateFromNow() {
     calculateSleepTimes(hour, minute, 'now-results');
 }
 
-// 从自定义时间计算最佳起床时间
+// Calculate optimal wake-up time from custom time
 function calculateFromCustom() {
     const bedtimeInput = document.getElementById('bedtime').value;
     if (!bedtimeInput) {
-        showNotification('请选择睡觉时间！', 'warning');
+        showNotification('Please select a bedtime!', 'warning');
         return;
     }
     
@@ -81,35 +82,35 @@ function calculateFromCustom() {
     calculateSleepTimes(hour, minute, 'custom-results');
 }
 
-// 核心睡眠时间计算函数（基于 Python 代码逻辑）
+// Core sleep time calculation function (based on Python code logic)
 function calculateSleepTimes(hour, minute, resultElementId) {
-    // 添加 15 分钟入睡时间
+    // Add 15 minutes for falling asleep
     minute += 15;
     if (minute >= 60) {
         minute -= 60;
         hour += 1;
     }
     
-    // 转换为总分钟数
+    // Convert to total minutes
     let totalMinutes = hour * 60 + minute;
     
     const results = [];
     
-    // 计算 6 个睡眠周期（每个 90 分钟）
+    // Calculate 6 sleep cycles (90 minutes each)
     for (let i = 0; i < 6; i++) {
-        totalMinutes += 90; // 添加一个睡眠周期
+        totalMinutes += 90; // Add one sleep cycle
         
         let wakeHour = Math.floor(totalMinutes / 60);
         let wakeMinute = totalMinutes % 60;
         
-        // 处理跨天情况
+        // Handle next day cases
         let nextDay = false;
         if (wakeHour >= 24) {
             wakeHour -= 24;
             nextDay = true;
         }
         
-        // 格式化时间显示
+        // Format time display
         const timeString = `${wakeHour.toString().padStart(2, '0')}:${wakeMinute.toString().padStart(2, '0')}`;
         const cycleCount = i + 1;
         const sleepHours = (cycleCount * 90) / 60;
@@ -118,42 +119,42 @@ function calculateSleepTimes(hour, minute, resultElementId) {
             time: timeString,
             cycles: cycleCount,
             hours: sleepHours.toFixed(1),
-            isRecommended: i === 5, // 最后一个是推荐的
+            isRecommended: i === 5, // Last one is recommended
             nextDay: nextDay
         });
     }
     
     displayResults(results, resultElementId);
     
-    // 显示成功通知
-    showNotification('计算完成！建议选择推荐的起床时间。', 'success');
+    // Show success notification
+    showNotification('Calculation complete! We recommend choosing the highlighted wake-up time.', 'success');
 }
 
-// 显示计算结果
+// Display calculation results
 function displayResults(results, elementId) {
     const resultElement = document.getElementById(elementId);
     
-    let html = '<h4>🌅 最佳起床时间：</h4>';
+    let html = '<h4>🌅 Optimal Wake-up Times:</h4>';
     
     results.forEach((result, index) => {
         const recommendedClass = result.isRecommended ? ' recommended' : '';
-        const nextDayText = result.nextDay ? ' 次日' : '';
+        const nextDayText = result.nextDay ? ' (next day)' : '';
         
         html += `
             <div class="result-item${recommendedClass}">
                 <div>
                     <div class="result-time">${result.time}${nextDayText}</div>
-                    <div class="result-cycles">${result.cycles} 个睡眠周期 (${result.hours} 小时睡眠)</div>
+                    <div class="result-cycles">${result.cycles} sleep cycles (${result.hours} hours of sleep)</div>
                 </div>
             </div>
         `;
     });
     
-    html += '<p style="margin-top: 20px; color: #718096; font-style: italic; text-align: center;">💡 建议选择最后一个时间点起床，效果最佳！</p>';
+    html += '<p style="margin-top: 20px; color: #718096; font-style: italic; text-align: center;">💡 We recommend waking up at the highlighted time for best results!</p>';
     
     resultElement.innerHTML = html;
     
-    // 添加动画效果
+    // Add animation effects
     setTimeout(() => {
         const items = resultElement.querySelectorAll('.result-item');
         items.forEach((item, index) => {
@@ -171,14 +172,14 @@ function displayResults(results, elementId) {
     }, 100);
 }
 
-// 显示通知消息
+// Show notification message
 function showNotification(message, type = 'info') {
-    // 创建通知元素
+    // Create notification element
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.textContent = message;
     
-    // 样式
+    // Styling
     Object.assign(notification.style, {
         position: 'fixed',
         top: '100px',
@@ -193,7 +194,7 @@ function showNotification(message, type = 'info') {
         transition: 'all 0.3s ease'
     });
     
-    // 根据类型设置颜色
+    // Set color based on type
     switch(type) {
         case 'success':
             notification.style.background = 'linear-gradient(135deg, #38b2ac, #319795)';
@@ -205,16 +206,16 @@ function showNotification(message, type = 'info') {
             notification.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
     }
     
-    // 添加到页面
+    // Add to page
     document.body.appendChild(notification);
     
-    // 显示动画
+    // Show animation
     setTimeout(() => {
         notification.style.opacity = '1';
         notification.style.transform = 'translateX(0)';
     }, 100);
     
-    // 自动隐藏
+    // Auto hide
     setTimeout(() => {
         notification.style.opacity = '0';
         notification.style.transform = 'translateX(100%)';
@@ -227,12 +228,12 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
-// 格式化时间显示
+// Format time display
 function formatTime(hour, minute) {
     return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
 }
 
-// 添加页面滚动效果
+// Add page scroll effects
 window.addEventListener('scroll', function() {
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 50) {
@@ -244,9 +245,39 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// 添加键盘支持
+// Setup mobile menu functionality
+function setupMobileMenu() {
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    if (mobileMenuBtn && navMenu) {
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenuBtn.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenuBtn.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!mobileMenuBtn.contains(e.target) && !navMenu.contains(e.target)) {
+                mobileMenuBtn.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+    }
+}
+
+// Add keyboard support
 document.addEventListener('keydown', function(e) {
-    // Enter 键触发计算
+    // Enter key triggers calculation
     if (e.key === 'Enter') {
         const activeTab = document.querySelector('.tab-content.active');
         if (activeTab) {
@@ -255,6 +286,16 @@ document.addEventListener('keydown', function(e) {
             } else if (activeTab.id === 'custom') {
                 calculateFromCustom();
             }
+        }
+    }
+    
+    // Escape key closes mobile menu
+    if (e.key === 'Escape') {
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+        if (mobileMenuBtn && navMenu) {
+            mobileMenuBtn.classList.remove('active');
+            navMenu.classList.remove('active');
         }
     }
 }); 
