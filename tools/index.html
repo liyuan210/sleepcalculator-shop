@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿﻿<!DOCTYPE html>
 <html lang='en'>
 <head>
     <meta charset='UTF-8'>
@@ -156,7 +156,7 @@
                 <input type='time' class='form-input' id='wakeTime' value='07:00' placeholder='Wake-up time'>
                 <input type='number' class='form-input' id='fallAsleepDuration' value='15' min='0' max='120' placeholder='Time to fall asleep (minutes)'>
                 
-                <button class='tool-button' onclick='calculateSleepDuration()'>Calculate Sleep Duration</button>
+                <button class='tool-button' onclick='calculateSleepDurationTool()'>Calculate Sleep Duration</button>
                 
                 <div class='result-box' id='durationResult'>
                     <div id='durationStats'></div>
@@ -238,7 +238,7 @@
             let timesHtml = '<h4>Recommended Wake-up Times:</h4>';
             for (let i = 1; i <= 6; i++) {
                 const wakeTime = new Date(bedTime.getTime() + (i * 90) * 60000);
-                const timeStr = wakeTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: false});
+                const timeStr = wakeTime.toLocaleTimeString('zh-CN', {hour: '2-digit', minute: '2-digit', hour12: false});
                 const isRecommended = i === 6;
                 timesHtml += '<div style=\"padding: 10px; margin: 5px 0; background: ' + (isRecommended ? '#f0fff4' : '#fff') + '; border-radius: 8px; border: 2px solid ' + (isRecommended ? '#48bb78' : '#e2e8f0') + ';\"><strong>' + timeStr + '</strong> (' + (i * 1.5) + ' hours)' + (isRecommended ? ' <span style=\"color: #48bb78;\">Recommended</span>' : '') + '</div>';
             }
@@ -266,14 +266,14 @@
             score = Math.max(0, score);
             
             let level = score >= 85 ? 'Excellent' : score >= 70 ? 'Good' : score >= 55 ? 'Fair' : 'Poor';
-            let advice = score >= 85 ? 'Your sleep quality is excellent!' : score >= 70 ? 'Good sleep quality, with room for improvement.' : score >= 55 ? 'There\\'s room for improvement. Consider adjusting your sleep routine.' : 'We recommend consulting a doctor to improve your sleep habits.';
+            let advice = score >= 85 ? 'Your sleep quality is excellent!' : score >= 70 ? 'Good sleep quality, with room for improvement.' : score >= 55 ? 'There\'s room for improvement. Consider adjusting your sleep routine.' : 'We recommend consulting a doctor to improve your sleep habits.';
             
             document.getElementById('qualityScore').innerHTML = '<h4>Sleep Quality: ' + level + ' (' + score + ' points)</h4><p>' + advice + '</p>';
             document.getElementById('qualityResult').style.display = 'block';
         }
 
         // Calculate sleep duration
-        function calculateSleepDuration() {
+        function calculateSleepDurationTool() {
             const bedTime = document.getElementById('bedTime').value;
             const wakeTime = document.getElementById('wakeTime').value;
             const fallAsleepDuration = parseInt(document.getElementById('fallAsleepDuration').value);
