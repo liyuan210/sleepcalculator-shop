@@ -1,4 +1,4 @@
-﻿﻿﻿<!DOCTYPE html>
+﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
 <html lang='en'>
 <head>
     <meta charset='UTF-8'>
@@ -105,7 +105,7 @@
                 
                 <input type='time' class='form-input' id='sleepTime' style='display: none;'>
                 
-                <button class='tool-button' onclick='calculateSleepTime()'>Calculate Optimal Wake-up Time</button>
+                <button class='tool-button' onclick='toolsCalculateSleepTime()'>Calculate Optimal Wake-up Time</button>
                 
                 <div class='result-box' id='sleepResult'>
                     <div id='sleepTimes'></div>
@@ -139,7 +139,7 @@
                     <option value='poor'>Morning feeling: Exhausted</option>
                 </select>
                 
-                <button class='tool-button' onclick='assessSleepQuality()'>Assess Sleep Quality</button>
+                <button class='tool-button' onclick='toolsAssessSleepQuality()'>Assess Sleep Quality</button>
                 
                 <div class='result-box' id='qualityResult'>
                     <div id='qualityScore'></div>
@@ -163,6 +163,36 @@
                 </div>
             </div>
 
+            <!-- Reverse Bedtime Calculator -->
+            <div class='tool-card'>
+                <div style='font-size: 3rem; margin-bottom: 20px;'>🌙</div>
+                <h3>Reverse Bedtime Calculator</h3>
+                <p>Enter your target wake-up time and choose sleep cycles or hours to get recommended bedtimes</p>
+                
+                <input type='time' class='form-input' id='reverseWakeTime' value='07:00' placeholder='Target wake-up time'>
+                
+                <select class='form-select' id='reverseMode'>
+                    <option value='cycles'>By Sleep Cycles</option>
+                    <option value='hours'>By Sleep Hours</option>
+                </select>
+                
+                <select class='form-select' id='reverseCycles'>
+                    <option value='4'>4 cycles (6.0 hours)</option>
+                    <option value='5' selected>5 cycles (7.5 hours)</option>
+                    <option value='6'>6 cycles (9.0 hours)</option>
+                </select>
+                
+                <input type='number' class='form-input' id='desiredSleepHours' value='7.5' min='3' max='12' step='0.5' style='display: none;' placeholder='Desired sleep hours'>
+                
+                <input type='number' class='form-input' id='reverseFallAsleep' value='15' min='0' max='120' placeholder='Time to fall asleep (minutes)'>
+                
+                <button class='tool-button' onclick='calculateBedtimeTool()'>Calculate Bedtime</button>
+                
+                <div class='result-box' id='reverseResult'>
+                    <div id='reverseTimes'></div>
+                </div>
+            </div>
+            
             <!-- Sleep Environment Check -->
             <div class='tool-card'>
                 <div style='font-size: 3rem; margin-bottom: 20px;'>🏠</div>
@@ -187,7 +217,7 @@
                     <option value='bright'>Light conditions: Bright light</option>
                 </select>
                 
-                <button class='tool-button' onclick='checkEnvironment()'>Check Sleep Environment</button>
+                <button class='tool-button' onclick='toolsCheckEnvironment()'>Check Sleep Environment</button>
                 
                 <div class='result-box' id='environmentResult'>
                     <div id='environmentScore'></div>
@@ -209,6 +239,7 @@
     </footer>
 
     <script src='../script.js'></script>
+    <script src='../tools-module.js'></script>
     <script>
         // Sleep mode toggle
         document.getElementById('sleepMode').addEventListener('change', function() {
