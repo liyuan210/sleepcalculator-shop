@@ -119,12 +119,28 @@
                     <div class="tabs">
                         <button class="tab-btn active" data-tab="now">Sleep Now</button>
                         <button class="tab-btn" data-tab="custom">Custom Time</button>
+                        <button class="tab-btn" data-tab="schedule">Sleep Schedule</button>
                     </div>
 
                     <!-- 现在睡觉 -->
                     <div class="tab-content active" id="now">
                         <div class="current-time">
                             <h3>Current Time: <span id="current-time-display"></span></h3>
+                            <div class="timezone-selector">
+                                <label for="timezone-now">Timezone:</label>
+                                <select id="timezone-now" onchange="updateCurrentTime()">
+                                    <option value="local">Local Time</option>
+                                    <option value="UTC">UTC</option>
+                                    <option value="America/New_York">New York (EST/EDT)</option>
+                                    <option value="America/Los_Angeles">Los Angeles (PST/PDT)</option>
+                                    <option value="Europe/London">London (GMT/BST)</option>
+                                    <option value="Europe/Paris">Paris (CET/CEST)</option>
+                                    <option value="Asia/Tokyo">Tokyo (JST)</option>
+                                    <option value="Asia/Shanghai">Shanghai (CST)</option>
+                                    <option value="Asia/Dubai">Dubai (GST)</option>
+                                    <option value="Australia/Sydney">Sydney (AEST/AEDT)</option>
+                                </select>
+                            </div>
                             <p>If you go to bed now, your optimal wake-up times are:</p>
                         </div>
                         <button class="calculate-btn" onclick="calculateFromNow()">Calculate Optimal Wake-up Time</button>
@@ -137,8 +153,95 @@
                             <label for="bedtime">Bedtime:</label>
                             <input type="time" id="bedtime" value="23:00">
                         </div>
+                        <div class="input-group">
+                            <label for="timezone-custom">Timezone:</label>
+                            <select id="timezone-custom">
+                                <option value="local">Local Time</option>
+                                <option value="UTC">UTC</option>
+                                <option value="America/New_York">New York (EST/EDT)</option>
+                                <option value="America/Los_Angeles">Los Angeles (PST/PDT)</option>
+                                <option value="Europe/London">London (GMT/BST)</option>
+                                <option value="Europe/Paris">Paris (CET/CEST)</option>
+                                <option value="Asia/Tokyo">Tokyo (JST)</option>
+                                <option value="Asia/Shanghai">Shanghai (CST)</option>
+                                <option value="Asia/Dubai">Dubai (GST)</option>
+                                <option value="Australia/Sydney">Sydney (AEST/AEDT)</option>
+                            </select>
+                        </div>
                         <button class="calculate-btn" onclick="calculateFromCustom()">Calculate Optimal Wake-up Time</button>
                         <div class="results" id="custom-results"></div>
+                    </div>
+
+                    <!-- 睡眠计划 -->
+                    <div class="tab-content" id="schedule">
+                        <div class="schedule-settings">
+                            <h3>🗓️ Sleep Schedule Settings</h3>
+                            
+                            <div class="schedule-mode">
+                                <label>Schedule Mode:</label>
+                                <div class="mode-selector">
+                                    <input type="radio" id="same-schedule" name="schedule-mode" value="same" checked>
+                                    <label for="same-schedule">Same schedule every day</label>
+                                    
+                                    <input type="radio" id="different-schedule" name="schedule-mode" value="different">
+                                    <label for="different-schedule">Different weekday/weekend schedule</label>
+                                </div>
+                            </div>
+
+                            <div id="same-schedule-settings" class="schedule-group">
+                                <div class="input-group">
+                                    <label for="daily-bedtime">Daily Bedtime:</label>
+                                    <input type="time" id="daily-bedtime" value="23:00">
+                                </div>
+                            </div>
+
+                            <div id="different-schedule-settings" class="schedule-group" style="display: none;">
+                                <div class="weekday-weekend-settings">
+                                    <div class="weekday-settings">
+                                        <h4>📅 Weekdays (Mon-Fri)</h4>
+                                        <div class="input-group">
+                                            <label for="weekday-bedtime">Bedtime:</label>
+                                            <input type="time" id="weekday-bedtime" value="22:30">
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="weekday-wake">Wake Time:</label>
+                                            <input type="time" id="weekday-wake" value="06:30">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="weekend-settings">
+                                        <h4>🎉 Weekends (Sat-Sun)</h4>
+                                        <div class="input-group">
+                                            <label for="weekend-bedtime">Bedtime:</label>
+                                            <input type="time" id="weekend-bedtime" value="23:30">
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="weekend-wake">Wake Time:</label>
+                                            <input type="time" id="weekend-wake" value="08:00">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="timezone-schedule">Timezone:</label>
+                                <select id="timezone-schedule">
+                                    <option value="local">Local Time</option>
+                                    <option value="UTC">UTC</option>
+                                    <option value="America/New_York">New York (EST/EDT)</option>
+                                    <option value="America/Los_Angeles">Los Angeles (PST/PDT)</option>
+                                    <option value="Europe/London">London (GMT/BST)</option>
+                                    <option value="Europe/Paris">Paris (CET/CEST)</option>
+                                    <option value="Asia/Tokyo">Tokyo (JST)</option>
+                                    <option value="Asia/Shanghai">Shanghai (CST)</option>
+                                    <option value="Asia/Dubai">Dubai (GST)</option>
+                                    <option value="Australia/Sydney">Sydney (AEST/AEDT)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button class="calculate-btn" onclick="calculateSchedule()">Analyze Sleep Schedule</button>
+                        <div class="results" id="schedule-results"></div>
                     </div>
                 </div>
             </div>

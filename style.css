@@ -258,16 +258,19 @@ body {
     font-size: 1.1rem;
 }
 
-.input-group input {
+.input-group input,
+.input-group select {
     width: 100%;
     padding: 15px 20px;
     border: 2px solid #e2e8f0;
     border-radius: 10px;
     font-size: 1.1rem;
     transition: border-color 0.3s ease;
+    background: white;
 }
 
-.input-group input:focus {
+.input-group input:focus,
+.input-group select:focus {
     outline: none;
     border-color: #667eea;
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
@@ -701,4 +704,187 @@ body {
 /* 滚动行为 */
 html {
     scroll-behavior: smooth;
+}
+
+/* 时区选择器 */
+.timezone-selector {
+    margin: 15px 0;
+}
+
+.timezone-selector label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #4a5568;
+}
+
+.timezone-selector select {
+    width: 100%;
+    padding: 10px 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+}
+
+/* 睡眠计划设置 */
+.schedule-settings {
+    background: #f8fafc;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.schedule-settings h3 {
+    color: #2d3748;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.schedule-mode {
+    margin-bottom: 25px;
+}
+
+.schedule-mode > label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #4a5568;
+}
+
+.mode-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mode-selector input[type="radio"] {
+    margin-right: 8px;
+}
+
+.mode-selector label {
+    font-weight: 400;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.schedule-group {
+    margin-top: 20px;
+}
+
+.weekday-weekend-settings {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.weekday-settings,
+.weekend-settings {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.weekday-settings h4,
+.weekend-settings h4 {
+    color: #2d3748;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+/* 睡眠质量评分 */
+.sleep-quality-score {
+    background: linear-gradient(135deg, #38b2ac, #319795);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.quality-score {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.quality-description {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.quality-factors {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.quality-factor {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.factor-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.factor-score {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* 睡眠建议 */
+.sleep-recommendations {
+    background: #edf2f7;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+.sleep-recommendations h4 {
+    color: #2d3748;
+    margin-bottom: 15px;
+}
+
+.recommendations-list {
+    list-style: none;
+}
+
+.recommendations-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #cbd5e0;
+    color: #4a5568;
+}
+
+.recommendations-list li:last-child {
+    border-bottom: none;
+}
+
+.recommendations-list li::before {
+    content: "💡 ";
+    margin-right: 8px;
+}
+
+/* 响应式设计 - 睡眠计划 */
+@media (max-width: 768px) {
+    .weekday-weekend-settings {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .schedule-settings {
+        padding: 20px;
+    }
+    
+    .quality-factors {
+        grid-template-columns: 1fr;
+    }
 } 
