@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
+﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
 <html lang='en'>
 <head>
     <meta charset='UTF-8'>
@@ -26,7 +26,7 @@
         }
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin-bottom: 60px;
         }
@@ -62,6 +62,31 @@
             padding: 20px;
             margin-top: 20px;
             display: none;
+        }
+        /* 移动端优化 */
+        @media (max-width: 480px) {
+            .tools-container {
+                margin: 150px auto 0;
+                padding: 0 16px;
+            }
+            .tools-title {
+                font-size: 2.2rem;
+                margin-bottom: 16px;
+            }
+            .tools-grid {
+                gap: 20px;
+            }
+            .tool-card {
+                padding: 22px;
+            }
+            .tool-button {
+                min-height: 44px;
+                font-size: 0.95rem;
+            }
+            .form-input, .form-select {
+                padding: 12px 14px;
+                font-size: 0.95rem;
+            }
         }
     </style>
 </head>
@@ -107,7 +132,7 @@
                 
                 <button class='tool-button' onclick='toolsCalculateSleepTime()'>Calculate Optimal Wake-up Time</button>
                 
-                <div class='result-box' id='sleepResult'>
+                <div class='result-box' id='sleepResult' role='region' aria-live='polite' aria-atomic='true' aria-label='Sleep Time Results'>
                     <div id='sleepTimes'></div>
                 </div>
             </div>
@@ -141,7 +166,7 @@
                 
                 <button class='tool-button' onclick='toolsAssessSleepQuality()'>Assess Sleep Quality</button>
                 
-                <div class='result-box' id='qualityResult'>
+                <div class='result-box' id='qualityResult' role='region' aria-live='polite' aria-atomic='true' aria-label='Sleep Quality Results'>
                     <div id='qualityScore'></div>
                 </div>
             </div>
@@ -158,7 +183,7 @@
                 
                 <button class='tool-button' onclick='calculateSleepDurationTool()'>Calculate Sleep Duration</button>
                 
-                <div class='result-box' id='durationResult'>
+                <div class='result-box' id='durationResult' role='region' aria-live='polite' aria-atomic='true' aria-label='Sleep Duration Results'>
                     <div id='durationStats'></div>
                 </div>
             </div>
@@ -188,7 +213,7 @@
                 
                 <button class='tool-button' onclick='calculateBedtimeTool()'>Calculate Bedtime</button>
                 
-                <div class='result-box' id='reverseResult'>
+                <div class='result-box' id='reverseResult' role='region' aria-live='polite' aria-atomic='true' aria-label='Reverse Bedtime Results'>
                     <div id='reverseTimes'></div>
                 </div>
             </div>
@@ -219,7 +244,7 @@
                 
                 <button class='tool-button' onclick='toolsCheckEnvironment()'>Check Sleep Environment</button>
                 
-                <div class='result-box' id='environmentResult'>
+                <div class='result-box' id='environmentResult' role='region' aria-live='polite' aria-atomic='true' aria-label='Environment Check Results'>
                     <div id='environmentScore'></div>
                 </div>
             </div>
