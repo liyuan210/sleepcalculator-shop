@@ -1,17 +1,64 @@
-* {
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+:root {
+    --bg-page: #f7fafc;
+    --surface: #ffffff;
+    --surface-muted: #edf2f7;
+    --text-primary: #1f2937;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --brand: #667eea;
+    --brand-strong: #5a67d8;
+    --brand-alt: #764ba2;
+    --success: #38b2ac;
+    --border: 2px solid #e2e8f0;
+    --radius: 15px;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --shadow-strong: 0 15px 35px rgba(102, 126, 234, 0.18);
+    --max-width: 1200px;
+    --focus: rgba(102, 126, 234, 0.45);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    color: #333;
+    color: var(--text-primary);
+    background: var(--bg-page);
+    min-height: 100vh;
+}
+
+body, button, input, select, textarea, a {
+    transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
 }
 
 .container {
-    max-width: 1200px;
+    width: min(var(--max-width), 100%);
     margin: 0 auto;
     padding: 0 20px;
 }
