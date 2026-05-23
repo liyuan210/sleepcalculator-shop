@@ -1,12 +1,6 @@
-/**
- * Simple Consent Banner for Cookies & Google AdSense
- * - Shows a banner until the user provides consent
- * - Blocks ads rendering (adsbygoogle.push) before consent
- * - Remembers consent in localStorage
- */
 (function() {
   var STORAGE_KEY = 'sleepcalc_consent';
-  var defaultConsent = { ads: false, personalized: false, timestamp: null };
+  var defaultConsent = { analytics: false, timestamp: null };
   var consent;
 
   try {
@@ -15,29 +9,43 @@
     consent = defaultConsent;
   }
 
-  // Before consent, prevent ads from rendering
-  if (!consent.ads) {
-    window.adsbygoogle = { push: function() { /* blocked until consent */ } };
-  } else {
-    window.adsbygoogle = window.adsbygoogle || [];
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function() { window.dataLayer.push(arguments); };
+
+  function loadAnalytics() {
+    if (window.analyticsLoaded || !document.head) return;
+    window.analyticsLoaded = true;
+
+    var gaScript = document.createElement('script');
+    gaScript.async = true;
+    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-8D482FWL5M';
+    document.head.appendChild(gaScript);
+
+    gaScript.onload = function() {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function() { window.dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', 'G-8D482FWL5M', { anonymize_ip: true });
+    };
   }
 
   function saveConsent(newConsent) {
     newConsent.timestamp = Date.now();
     consent = newConsent;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
-    // Enable ads rendering after consent
-    window.adsbygoogle = window.adsbygoogle || [];
-    // Optionally re-trigger ad slots if present on page
-    // document.querySelectorAll('.adsbygoogle').forEach(function(el){ (adsbygoogle = window.adsbygoogle || []).push({}); });
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
+    } catch (e) {}
     hideBanner();
+    if (consent.analytics) {
+      loadAnalytics();
+    }
   }
 
   function createBanner() {
     var banner = document.createElement('div');
     banner.id = 'consent-banner';
     banner.setAttribute('role', 'dialog');
-    banner.setAttribute('aria-label', 'Cookie and Ads Consent');
+    banner.setAttribute('aria-label', 'Cookie and Analytics Consent');
     banner.style.position = 'fixed';
     banner.style.bottom = '0';
     banner.style.left = '0';
@@ -61,14 +69,14 @@
     text.style.color = '#4a5568';
     text.style.fontSize = '0.95rem';
     text.innerHTML =
-      'We use cookies and Google AdSense to provide and improve our services. ' +
-      'Ads may use cookies or identifiers. You can manage your preferences. ' +
-      '<a href="/privacy.html" style="color:#667eea;text-decoration:none;">Privacy Policy</a> · ' +
-      '<a href="https://www.google.com/settings/ads" target="_blank" rel="noopener" style="color:#667eea;text-decoration:none;">Ad Settings</a>';
+      'We use cookies and Google Analytics to improve the site. ' +
+      'Analytics are only enabled after you consent. ' +
+      '<a href="/privacy.html" style="color:#667eea;text-decoration:none;">Privacy Policy</a>';
 
     var actions = document.createElement('div');
     actions.style.display = 'flex';
     actions.style.gap = '10px';
+    actions.style.flexWrap = 'wrap';
 
     function mkBtn(label, bg, color) {
       var btn = document.createElement('button');
@@ -84,31 +92,25 @@
       return btn;
     }
 
-    var acceptAll = mkBtn('Accept all', 'linear-gradient(135deg,#667eea,#764ba2)', '#fff');
-    var rejectAds = mkBtn('Reject ads', '#edf2f7', '#2d3748');
+    var acceptBtn = mkBtn('Accept analytics', 'linear-gradient(135deg,#667eea,#764ba2)', '#fff');
+    var rejectBtn = mkBtn('Reject analytics', '#edf2f7', '#2d3748');
     var manageBtn = mkBtn('Manage choices', '#edf2f7', '#2d3748');
 
-    acceptAll.addEventListener('click', function() {
-      saveConsent({ ads: true, personalized: true, timestamp: Date.now() });
+    acceptBtn.addEventListener('click', function() {
+      saveConsent({ analytics: true });
     });
 
-    rejectAds.addEventListener('click', function() {
-      saveConsent({ ads: false, personalized: false, timestamp: Date.now() });
-      // Keep ads blocked (no change to window.adsbygoogle mock)
+    rejectBtn.addEventListener('click', function() {
+      saveConsent({ analytics: false });
     });
 
     manageBtn.addEventListener('click', function() {
-      // Simple toggle personalized option
-      var wantAds = confirm('Enable ads? (OK = Yes, Cancel = No)');
-      var personalized = false;
-      if (wantAds) {
-        personalized = confirm('Allow personalized ads? (OK = Yes, Cancel = No)');
-      }
-      saveConsent({ ads: !!wantAds, personalized: !!personalized, timestamp: Date.now() });
+      var allowAnalytics = confirm('Allow Google Analytics? OK = Yes, Cancel = No');
+      saveConsent({ analytics: allowAnalytics });
     });
 
-    actions.appendChild(acceptAll);
-    actions.appendChild(rejectAds);
+    actions.appendChild(acceptBtn);
+    actions.appendChild(rejectBtn);
     actions.appendChild(manageBtn);
 
     container.appendChild(text);
@@ -119,16 +121,17 @@
 
   function hideBanner() {
     var el = document.getElementById('consent-banner');
-    if (el && el.parentNode) el.parentNode.removeChild(el);
+    if (el && el.parentNode) {
+      el.parentNode.removeChild(el);
+    }
   }
 
   function init() {
-    if (!consent.ads) {
-      // Show banner only if not consented
+    if (consent.analytics) {
+      loadAnalytics();
+    }
+    if (!consent.timestamp) {
       createBanner();
-    } else {
-      // already consented, ensure ads array exists
-      window.adsbygoogle = window.adsbygoogle || [];
     }
   }
 
