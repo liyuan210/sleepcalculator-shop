@@ -108,7 +108,7 @@ function calculateSleepTimes(hour, minute, resultElementId) {
             nextDay = true;
         }
 
-        var timeString = String(wakeHour).padStart(2, '0') + ':' + String(wakeMinute).padStart(2, '0');
+        var timeString = (wakeHour < 10 ? '0' : '') + wakeHour + ':' + (wakeMinute < 10 ? '0' : '') + wakeMinute;
         var cycleCount = i + 1;
         var sleepHours = (cycleCount * 90) / 60;
 
