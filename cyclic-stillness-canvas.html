@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @font-face {
+    font-family: 'WorkSans';
+    src: url('./fonts/WorkSans-Regular.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'WorkSansLight';
+    src: url('./fonts/WorkSans-Italic.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'Jura';
+    src: url('./fonts/Jura-Light.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'CrimsonPro';
+    src: url('./fonts/CrimsonPro-Italic.ttf') format('truetype');
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1270px;
+    height: 760px;
+    overflow: hidden;
+    background: #0d0f18;
+    font-family: 'WorkSans', sans-serif;
+    position: relative;
+  }
+
+  /* Deep night gradient field */
+  .field {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 75% 35%, rgba(102,126,234,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 50% at 25% 65%, rgba(118,75,162,0.10) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 30% at 50% 50%, rgba(56,178,172,0.05) 0%, transparent 60%),
+      linear-gradient(175deg, #0d0f18 0%, #11152a 40%, #0f1322 100%);
+  }
+
+  /* Subtle grid texture - the "measurement system" */
+  .grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-position: center;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 80%);
+  }
+
+  /* Six orbit rings - the 6 sleep cycles, rendered as delicate circular traces */
+  .orbit {
+    position: absolute;
+    border-radius: 50%;
+    border: 0.5px solid rgba(255,255,255,0.07);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .orbit-1 { width: 120px; height: 120px; border-color: rgba(102,126,234,0.18); }
+  .orbit-2 { width: 220px; height: 220px; border-color: rgba(102,126,234,0.13); }
+  .orbit-3 { width: 340px; height: 340px; border-color: rgba(118,75,162,0.12); }
+  .orbit-4 { width: 480px; height: 480px; border-color: rgba(118,75,162,0.09); }
+  .orbit-5 { width: 640px; height: 640px; border-color: rgba(255,255,255,0.05); }
+  .orbit-6 { width: 820px; height: 820px; border-color: rgba(255,255,255,0.03); }
+
+  /* Phase markers - points along the orbits suggesting cycle transitions */
+  .phase-point {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(56,178,172,0.7);
+  }
+  .phase-1 { width: 6px; height: 6px; top: calc(50% - 60px); left: calc(50% + 52px);
+             box-shadow: 0 0 12px 2px rgba(56,178,172,0.35); }
+  .phase-2 { width: 5px; height: 5px; top: calc(50% - 100px); left: calc(50% - 80px);
+             box-shadow: 0 0 10px 2px rgba(102,126,234,0.35); }
+  .phase-3 { width: 7px; height: 7px; top: calc(50% + 140px); left: calc(50% - 60px);
+             box-shadow: 0 0 14px 2px rgba(118,75,162,0.35); }
+  .phase-4 { width: 4px; height: 4px; top: calc(50% - 180px); left: calc(50% + 130px);
+             box-shadow: 0 0 8px 2px rgba(56,178,172,0.3); }
+  .phase-5 { width: 6px; height: 6px; top: calc(50% + 200px); left: calc(50% + 180px);
+             box-shadow: 0 0 12px 2px rgba(102,126,234,0.3); }
+  .phase-6 { width: 8px; height: 8px; top: calc(50% - 60px); left: calc(50% - 250px);
+             box-shadow: 0 0 16px 3px rgba(56,178,172,0.4); }
+
+  /* Central form - the anchor, a softly glowing meditative core */
+  .core {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, rgba(102,126,234,0.55) 0%, rgba(118,75,162,0.35) 50%, transparent 100%);
+    box-shadow:
+      0 0 60px 20px rgba(102,126,234,0.12),
+      0 0 120px 40px rgba(118,75,162,0.06),
+      0 0 200px 80px rgba(56,178,172,0.04);
+  }
+  .core-inner {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+
+  /* Waveform - subtle sine wave suggesting circadian rhythm across the lower portion */
+  .wave-container {
+    position: absolute;
+    bottom: 80px;
+    left: 0; right: 0;
+    height: 120px;
+    opacity: 0.18;
+  }
+  .wave {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 38px,
+        rgba(102,126,234,0.25) 38px,
+        rgba(102,126,234,0.25) 40px,
+        transparent 40px,
+        transparent 78px
+      );
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1270 120'%3E%3Cpath d='M0,60 Q80,10 160,60 Q240,110 320,60 Q400,10 480,60 Q560,110 640,60 Q720,10 800,60 Q880,110 960,60 Q1040,10 1120,60 Q1200,110 1270,60' fill='none' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E");
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1270 120'%3E%3Cpath d='M0,60 Q80,10 160,60 Q240,110 320,60 Q400,10 480,60 Q560,110 640,60 Q720,10 800,60 Q880,110 960,60 Q1040,10 1120,60 Q1200,110 1270,60' fill='none' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E");
+  }
+
+  /* Typography - whispered, clinical, essential */
+  .label-top-left {
+    position: absolute;
+    top: 48px;
+    left: 56px;
+    font-family: 'WorkSansLight', sans-serif;
+    font-size: 11px;
+    color: rgba(255,255,255,0.28);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .datum-right {
+    position: absolute;
+    top: 52px;
+    right: 56px;
+    font-family: 'Jura', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.22);
+    letter-spacing: 2px;
+    text-align: right;
+    line-height: 1.8;
+  }
+  .title-anchor {
+    position: absolute;
+    bottom: 120px;
+    left: 56px;
+    font-family: 'WorkSans', sans-serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 1px;
+  }
+  .subtitle-anchor {
+    position: absolute;
+    bottom: 108px;
+    left: 56px;
+    font-family: 'CrimsonPro', serif;
+    font-size: 13px;
+    color: rgba(56,178,172,0.4);
+    font-style: italic;
+  }
+  .reference-mark {
+    position: absolute;
+    bottom: 48px;
+    right: 56px;
+    font-family: 'Jura', monospace;
+    font-size: 8px;
+    color: rgba(255,255,255,0.15);
+    letter-spacing: 2px;
+  }
+  .center-note {
+    position: absolute;
+    top: calc(50% + 100px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'WorkSansLight', sans-serif;
+    font-size: 10px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 2px;
+  }
+
+  /* Precision hairline marks */
+  .hairline {
+    position: absolute;
+    background: rgba(255,255,255,0.04);
+  }
+  .hl-h { height: 0.5px; width: 100%; }
+  .hl-v { width: 0.5px; height: 100%; }
+  .hl-1 { top: 40px; }
+  .hl-2 { bottom: 40px; }
+  .hl-3 { left: 40px; }
+  .hl-4 { right: 40px; }
+</style>
+</head>
+<body>
+  <!-- Background field -->
+  <div class="field"></div>
+  <div class="grid"></div>
+
+  <!-- Boundary hairline marks -->
+  <div class="hairline hl-h hl-1"></div>
+  <div class="hairline hl-h hl-2"></div>
+  <div class="hairline hl-v hl-3"></div>
+  <div class="hairline hl-v hl-4"></div>
+
+  <!-- Six orbital traces -->
+  <div class="orbit orbit-6"></div>
+  <div class="orbit orbit-5"></div>
+  <div class="orbit orbit-4"></div>
+  <div class="orbit orbit-3"></div>
+  <div class="orbit orbit-2"></div>
+  <div class="orbit orbit-1"></div>
+
+  <!-- Phase markers on orbits -->
+  <div class="phase-point phase-6"></div>
+  <div class="phase-point phase-5"></div>
+  <div class="phase-point phase-4"></div>
+  <div class="phase-point phase-3"></div>
+  <div class="phase-point phase-2"></div>
+  <div class="phase-point phase-1"></div>
+
+  <!-- Central core -->
+  <div class="core">
+    <div class="core-inner"></div>
+  </div>
+
+  <!-- Waveform -->
+  <div class="wave-container">
+    <div class="wave"></div>
+  </div>
+
+  <!-- Typography elements -->
+  <div class="label-top-left">Observation Series No. 6</div>
+  <div class="datum-right">
+    CYCLE / 90 min<br>
+    PHASE / 1&ndash;6<br>
+    PERIOD / 540 min
+  </div>
+  <div class="title-anchor">Cyclic Stillness</div>
+  <div class="subtitle-anchor">on the architecture of restorative rhythm</div>
+  <div class="reference-mark">REF: SC-2024 &middot; FIG. III</div>
+  <div class="center-note">&#9670; &nbsp; COMPLETE CYCLES &nbsp; &#9670;</div>
+
+  <script>
+    // The canvas-design skill says the work must look meticulously hand-crafted.
+    // This script adds imperceptible organic variation to the phase markers,
+    // simulating the hand of a master who labored over every pixel.
+    (function() {
+      var points = document.querySelectorAll('.phase-point');
+      var jitter = [-0.8, 1.2, -0.5, 0.9, -1.1, 0.6];
+      points.forEach(function(p, i) {
+        var mt = parseFloat(getComputedStyle(p).marginTop || 0);
+        var ml = parseFloat(getComputedStyle(p).marginLeft || 0);
+        p.style.transform = 'translate(' + jitter[i] + 'px, ' + jitter[(i+1)%6] + 'px)';
+      });
+    })();
+  </script>
+</body>
+</html>
