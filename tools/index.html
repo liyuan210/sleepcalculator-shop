@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
+﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
 <html lang='en'>
 <head>
     <meta charset='UTF-8'>
@@ -9,7 +9,7 @@
     <link rel="alternate" hreflang="x-default" href="https://www.sleepcalculator.shop/tools/">
     <link rel="alternate" hreflang="en" href="https://www.sleepcalculator.shop/tools/">
     <link rel="stylesheet" href="../style.css">
-    <script src="../consent.js"></script>
+
     <style>
         .tools-container {
             max-width: 1200px;
@@ -93,9 +93,6 @@
             }
         }
     </style>
-    <link rel="canonical" href="https://www.sleepcalculator.shop/tools/">
-    <link rel="alternate" hreflang="en" href="https://www.sleepcalculator.shop/tools/">
-<script src="../consent.js"></script>
 </head>
 <body>
     <nav class='navbar'>
@@ -129,16 +126,16 @@
                 <div style='font-size: 3rem; margin-bottom: 20px;'>🕐</div>
                 <h3>Sleep Time Calculator</h3>
                 <p>Based on 90-minute sleep cycles, calculate optimal wake-up times to avoid being awakened during deep sleep</p>
-                
+
                 <select class='form-select' id='sleepMode'>
                     <option value='now'>Sleep Now</option>
                     <option value='custom'>Custom Bedtime</option>
                 </select>
-                
+
                 <input type='time' class='form-input' id='sleepTime' style='display: none;'>
-                
+
                 <button class='tool-button' onclick='toolsCalculateSleepTime()'>Calculate Optimal Wake-up Time</button>
-                
+
                 <div class='result-box' id='sleepResult' role='region' aria-live='polite' aria-atomic='true' aria-label='Sleep Time Results'>
                     <div id='sleepTimes'></div>
                 </div>
@@ -149,30 +146,30 @@
                 <div style='font-size: 3rem; margin-bottom: 20px;'>📊</div>
                 <h3>Sleep Quality Assessment</h3>
                 <p>Assess your sleep quality through a simple questionnaire and receive personalized improvement suggestions</p>
-                
+
                 <select class='form-select' id='fallAsleepTime'>
                     <option value='15'>Time to fall asleep: Within 15 minutes</option>
                     <option value='30'>Time to fall asleep: 15-30 minutes</option>
                     <option value='45'>Time to fall asleep: 30-45 minutes</option>
                     <option value='60'>Time to fall asleep: Over 45 minutes</option>
                 </select>
-                
+
                 <select class='form-select' id='nightWakeups'>
                     <option value='0'>Night awakenings: Never wake up</option>
                     <option value='1'>Night awakenings: 1-2 times</option>
                     <option value='2'>Night awakenings: 3-4 times</option>
                     <option value='3'>Night awakenings: 5+ times</option>
                 </select>
-                
+
                 <select class='form-select' id='morningFeeling'>
                     <option value='excellent'>Morning feeling: Refreshed and energetic</option>
                     <option value='good'>Morning feeling: Pretty good</option>
                     <option value='fair'>Morning feeling: Average</option>
                     <option value='poor'>Morning feeling: Exhausted</option>
                 </select>
-                
+
                 <button class='tool-button' onclick='toolsAssessSleepQuality()'>Assess Sleep Quality</button>
-                
+
                 <div class='result-box' id='qualityResult' role='region' aria-live='polite' aria-atomic='true' aria-label='Sleep Quality Results'>
                     <div id='qualityScore'></div>
                 </div>
@@ -183,13 +180,13 @@
                 <div style='font-size: 3rem; margin-bottom: 20px;'>⏰</div>
                 <h3>Sleep Duration Calculator</h3>
                 <p>Calculate actual sleep duration to help you understand if you're meeting recommended sleep time</p>
-                
+
                 <input type='time' class='form-input' id='bedTime' value='22:30' placeholder='Bedtime'>
                 <input type='time' class='form-input' id='wakeTime' value='07:00' placeholder='Wake-up time'>
                 <input type='number' class='form-input' id='fallAsleepDuration' value='15' min='0' max='120' placeholder='Time to fall asleep (minutes)'>
-                
+
                 <button class='tool-button' onclick='calculateSleepDurationTool()'>Calculate Sleep Duration</button>
-                
+
                 <div class='result-box' id='durationResult' role='region' aria-live='polite' aria-atomic='true' aria-label='Sleep Duration Results'>
                     <div id='durationStats'></div>
                 </div>
@@ -200,63 +197,72 @@
                 <div style='font-size: 3rem; margin-bottom: 20px;'>🌙</div>
                 <h3>Reverse Bedtime Calculator</h3>
                 <p>Enter your target wake-up time and choose sleep cycles or hours to get recommended bedtimes</p>
-                
+
                 <input type='time' class='form-input' id='reverseWakeTime' value='07:00' placeholder='Target wake-up time'>
-                
+
                 <select class='form-select' id='reverseMode'>
                     <option value='cycles'>By Sleep Cycles</option>
                     <option value='hours'>By Sleep Hours</option>
                 </select>
-                
+
                 <select class='form-select' id='reverseCycles'>
                     <option value='4'>4 cycles (6.0 hours)</option>
                     <option value='5' selected>5 cycles (7.5 hours)</option>
                     <option value='6'>6 cycles (9.0 hours)</option>
                 </select>
-                
+
                 <input type='number' class='form-input' id='desiredSleepHours' value='7.5' min='3' max='12' step='0.5' style='display: none;' placeholder='Desired sleep hours'>
-                
+
                 <input type='number' class='form-input' id='reverseFallAsleep' value='15' min='0' max='120' placeholder='Time to fall asleep (minutes)'>
-                
+
                 <button class='tool-button' onclick='calculateBedtimeTool()'>Calculate Bedtime</button>
-                
+
                 <div class='result-box' id='reverseResult' role='region' aria-live='polite' aria-atomic='true' aria-label='Reverse Bedtime Results'>
                     <div id='reverseTimes'></div>
                 </div>
             </div>
-            
+
             <!-- Sleep Environment Check -->
             <div class='tool-card'>
                 <div style='font-size: 3rem; margin-bottom: 20px;'>🏠</div>
                 <h3>Sleep Environment Check</h3>
                 <p>Assess whether your sleep environment is optimal and receive improvement suggestions</p>
-                
+
                 <select class='form-select' id='roomTemp'>
                     <option value='low'>Room temperature: Below 18°C</option>
                     <option value='optimal'>Room temperature: 18-22°C</option>
                     <option value='high'>Room temperature: Above 22°C</option>
                 </select>
-                
+
                 <select class='form-select' id='noiseLevel'>
                     <option value='quiet'>Noise level: Very quiet</option>
                     <option value='moderate'>Noise level: Occasional noise</option>
                     <option value='noisy'>Noise level: Frequent noise</option>
                 </select>
-                
+
                 <select class='form-select' id='lightLevel'>
                     <option value='dark'>Light conditions: Completely dark</option>
                     <option value='dim'>Light conditions: Dim light</option>
                     <option value='bright'>Light conditions: Bright light</option>
                 </select>
-                
+
                 <button class='tool-button' onclick='toolsCheckEnvironment()'>Check Sleep Environment</button>
-                
+
                 <div class='result-box' id='environmentResult' role='region' aria-live='polite' aria-atomic='true' aria-label='Environment Check Results'>
                     <div id='environmentScore'></div>
                 </div>
             </div>
         </div>
 
+    </div>
+
+    <!-- Back to Calculator CTA -->
+    <div style="max-width: 1200px; margin: 0 auto; padding: 40px 20px; text-align: center;">
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; padding: 40px 30px; color: white;">
+            <h2 style="font-size: 1.8rem; margin-bottom: 10px;">Ready to Find Your Optimal Wake-Up Time?</h2>
+            <p style="opacity: 0.9; margin-bottom: 20px;">Use our main sleep calculator based on 90-minute sleep cycles.</p>
+            <a href="../" style="display: inline-block; background: rgba(255,255,255,0.2); color: white; padding: 14px 32px; border-radius: 50px; font-weight: 600; text-decoration: none; border: 2px solid rgba(255,255,255,0.3);">Go to Sleep Calculator</a>
+        </div>
     </div>
 
     <footer class='footer'>
@@ -284,7 +290,7 @@
         function calculateSleepTime() {
             const mode = document.getElementById('sleepMode').value;
             let bedTime;
-            
+
             if (mode === 'now') {
                 bedTime = new Date();
                 bedTime.setMinutes(bedTime.getMinutes() + 15);
@@ -298,7 +304,7 @@
                 bedTime = new Date();
                 bedTime.setHours(parseInt(hours), parseInt(minutes) + 15, 0, 0);
             }
-            
+
             let timesHtml = '<h4>Recommended Wake-up Times:</h4>';
             for (let i = 1; i <= 6; i++) {
                 const wakeTime = new Date(bedTime.getTime() + (i * 90) * 60000);
@@ -306,7 +312,7 @@
                 const isRecommended = i === 6;
                 timesHtml += '<div style=\"padding: 10px; margin: 5px 0; background: ' + (isRecommended ? '#f0fff4' : '#fff') + '; border-radius: 8px; border: 2px solid ' + (isRecommended ? '#48bb78' : '#e2e8f0') + ';\"><strong>' + timeStr + '</strong> (' + (i * 1.5) + ' hours)' + (isRecommended ? ' <span style=\"color: #48bb78;\">Recommended</span>' : '') + '</div>';
             }
-            
+
             document.getElementById('sleepTimes').innerHTML = timesHtml;
             document.getElementById('sleepResult').style.display = 'block';
         }
@@ -316,22 +322,22 @@
             const fallAsleep = parseInt(document.getElementById('fallAsleepTime').value);
             const wakeups = parseInt(document.getElementById('nightWakeups').value);
             const feeling = document.getElementById('morningFeeling').value;
-            
+
             let score = 100;
             if (fallAsleep > 15) score -= (fallAsleep - 15);
             score -= wakeups * 15;
-            
+
             switch(feeling) {
                 case 'good': score -= 10; break;
                 case 'fair': score -= 20; break;
                 case 'poor': score -= 30; break;
             }
-            
+
             score = Math.max(0, score);
-            
+
             let level = score >= 85 ? 'Excellent' : score >= 70 ? 'Good' : score >= 55 ? 'Fair' : 'Poor';
             let advice = score >= 85 ? 'Your sleep quality is excellent!' : score >= 70 ? 'Good sleep quality, with room for improvement.' : score >= 55 ? 'There\'s room for improvement. Consider adjusting your sleep routine.' : 'We recommend consulting a doctor to improve your sleep habits.';
-            
+
             document.getElementById('qualityScore').innerHTML = '<h4>Sleep Quality: ' + level + ' (' + score + ' points)</h4><p>' + advice + '</p>';
             document.getElementById('qualityResult').style.display = 'block';
         }
@@ -341,33 +347,33 @@
             const bedTime = document.getElementById('bedTime').value;
             const wakeTime = document.getElementById('wakeTime').value;
             const fallAsleepDuration = parseInt(document.getElementById('fallAsleepDuration').value);
-            
+
             if (!bedTime || !wakeTime) {
                 alert('Please enter complete time information');
                 return;
             }
-            
+
             const [bedHours, bedMinutes] = bedTime.split(':').map(Number);
             const [wakeHours, wakeMinutes] = wakeTime.split(':').map(Number);
-            
+
             let bedDateTime = new Date();
             bedDateTime.setHours(bedHours, bedMinutes, 0, 0);
-            
+
             let wakeDateTime = new Date();
             wakeDateTime.setHours(wakeHours, wakeMinutes, 0, 0);
-            
+
             if (wakeDateTime < bedDateTime) {
                 wakeDateTime.setDate(wakeDateTime.getDate() + 1);
             }
-            
+
             const totalMinutes = (wakeDateTime - bedDateTime) / (1000 * 60);
             const actualSleepMinutes = totalMinutes - fallAsleepDuration;
-            
+
             const hours = Math.floor(actualSleepMinutes / 60);
             const minutes = actualSleepMinutes % 60;
-            
+
             let evaluation = actualSleepMinutes >= 420 && actualSleepMinutes <= 540 ? 'Ideal sleep duration!' : actualSleepMinutes >= 360 ? 'Acceptable sleep duration.' : 'Insufficient sleep duration.';
-            
+
             document.getElementById('durationStats').innerHTML = '<h4>Sleep Statistics</h4><p><strong>Total time in bed:</strong> ' + Math.floor(totalMinutes / 60) + ' hours ' + (totalMinutes % 60) + ' minutes<br><strong>Actual sleep time:</strong> ' + hours + ' hours ' + minutes + ' minutes<br><strong>Assessment:</strong> ' + evaluation + '</p>';
             document.getElementById('durationResult').style.display = 'block';
         }
@@ -377,26 +383,26 @@
             const temp = document.getElementById('roomTemp').value;
             const noise = document.getElementById('noiseLevel').value;
             const light = document.getElementById('lightLevel').value;
-            
+
             let score = 0;
             let suggestions = [];
-            
+
             if (temp === 'optimal') score += 33;
             else suggestions.push('Adjust room temperature to 18-22°C');
-            
+
             if (noise === 'quiet') score += 33;
             else suggestions.push('Reduce noise interference');
-            
+
             if (light === 'dark') score += 34;
             else suggestions.push('Use blackout curtains');
-            
+
             let level = score >= 90 ? 'Excellent' : score >= 70 ? 'Good' : score >= 50 ? 'Fair' : 'Needs Improvement';
-            
+
             let resultHtml = '<h4>Environment Score: ' + level + ' (' + score + ' points)</h4>';
             if (suggestions.length > 0) {
                 resultHtml += '<p><strong>Improvement Suggestions:</strong><br>• ' + suggestions.join('<br>• ') + '</p>';
             }
-            
+
             document.getElementById('environmentScore').innerHTML = resultHtml;
             document.getElementById('environmentResult').style.display = 'block';
         }

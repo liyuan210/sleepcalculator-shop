@@ -43,16 +43,9 @@ button, input, select, textarea {
     font-family: inherit;
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
-}
+a { color: inherit; text-decoration: none; }
 
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
     outline: 3px solid var(--focus);
     outline-offset: 3px;
 }
@@ -63,7 +56,7 @@ textarea:focus-visible {
     padding: 0 20px;
 }
 
-/* 导航栏 */
+/* --- Navbar --- */
 .navbar {
     background: #fff;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -86,6 +79,7 @@ textarea:focus-visible {
 .nav-logo h2 {
     color: #667eea;
     font-size: 1.5rem;
+    font-weight: 700;
 }
 
 .nav-menu {
@@ -101,11 +95,9 @@ textarea:focus-visible {
     transition: color 0.3s ease;
 }
 
-.nav-menu a:hover {
-    color: #667eea;
-}
+.nav-menu a:hover { color: #667eea; }
 
-/* 移动端菜单按钮 */
+/* --- Mobile Menu Button --- */
 .mobile-menu-btn {
     display: none;
     flex-direction: column;
@@ -126,116 +118,47 @@ textarea:focus-visible {
     transition: all 0.3s ease;
 }
 
-.mobile-menu-btn.active span:nth-child(1) {
-    transform: rotate(45deg) translate(6px, 6px);
-}
+.mobile-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+.mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
+.mobile-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
 
-.mobile-menu-btn.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.mobile-menu-btn.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(6px, -6px);
-}
-
-/* 英雄区域 */
-.hero {
+/* --- Calculator Hero --- */
+.calculator-hero {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     text-align: center;
-    padding: 150px 0 100px;
+    padding: 130px 0 60px;
     margin-top: 70px;
 }
 
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
+.calculator-hero h1 {
+    font-size: 2.8rem;
     font-weight: 700;
+    margin-bottom: 10px;
 }
 
-.hero-subtitle {
-    font-size: 1.3rem;
-    margin-bottom: 30px;
+.calculator-hero .hero-subtitle {
+    font-size: 1.15rem;
     opacity: 0.9;
+    margin-bottom: 35px;
 }
 
-.cta-button {
-    display: inline-block;
-    background: rgba(255,255,255,0.2);
-    color: white;
-    padding: 15px 30px;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: 600;
-    border: 2px solid rgba(255,255,255,0.3);
-    transition: all 0.3s ease;
-}
-
-.cta-button:hover {
-    background: rgba(255,255,255,0.3);
-    transform: translateY(-2px);
-}
-
-/* 区域通用样式 */
-.info-section, .calculator-section, .tips-section, .blog-preview {
-    padding: 80px 0;
-}
-
-.calculator-section {
-    background: #f8fafc;
-}
-
-.blog-preview {
-    background: #fff;
-}
-
-/* 信息卡片 */
-.info-card, .calculator, .tips {
+/* --- Calculator Card --- */
+.calculator-card {
     background: white;
     border-radius: 15px;
-    padding: 40px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
+    padding: 35px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    max-width: 640px;
+    margin: 0 auto;
+    color: var(--text-primary);
+    text-align: left;
 }
 
-.info-card h3, .tips h3 {
-    color: #4a5568;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-}
-
-.info-card ul {
-    list-style: none;
-}
-
-.info-card li {
-    padding: 10px 0;
-    padding-left: 30px;
-    position: relative;
-    color: #718096;
-    line-height: 1.6;
-}
-
-.info-card li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: #38b2ac;
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
-/* 计算器样式 */
-.calculator-section h2 {
-    text-align: center;
-    color: #4a5568;
-    margin-bottom: 40px;
-    font-size: 2.5rem;
-}
-
+/* --- Tabs --- */
 .tabs {
     display: flex;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     border-radius: 10px;
     overflow: hidden;
     background: #f7fafc;
@@ -243,14 +166,14 @@ textarea:focus-visible {
 
 .tab-btn {
     flex: 1;
-    padding: 15px 20px;
+    padding: 14px 20px;
     border: none;
     background: transparent;
     cursor: pointer;
     font-size: 1rem;
     font-weight: 500;
-    transition: all 0.3s ease;
     color: #718096;
+    transition: all 0.3s ease;
 }
 
 .tab-btn.active {
@@ -258,61 +181,62 @@ textarea:focus-visible {
     color: white;
 }
 
-.tab-btn:hover {
+.tab-btn:hover:not(.active) {
     background: rgba(102, 126, 234, 0.1);
 }
 
-.tab-btn.active:hover {
-    background: #5a67d8;
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+.tab-hint {
+    color: #718096;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-.tab-content {
-    display: none;
-}
-
-.tab-content.active {
-    display: block;
-}
-
+/* --- Current Time --- */
 .current-time {
     text-align: center;
-    margin-bottom: 30px;
-    padding: 25px;
+    margin-bottom: 15px;
+    padding: 20px;
     background: #f7fafc;
     border-radius: 10px;
 }
 
-.current-time h3 {
-    color: #4a5568;
-    margin-bottom: 10px;
-    font-size: 1.3rem;
+.current-time-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #718096;
+    margin-bottom: 4px;
 }
 
-.current-time span {
+.current-time-value {
+    font-size: 2.4rem;
+    font-weight: 700;
     color: #667eea;
-    font-weight: bold;
 }
 
+/* --- Input Group --- */
 .input-group {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .input-group label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     font-weight: 600;
     color: #4a5568;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .input-group input,
 .input-group select {
     width: 100%;
-    padding: 15px 20px;
+    padding: 14px 18px;
     border: 2px solid #e2e8f0;
     border-radius: 10px;
     font-size: 1.1rem;
-    transition: border-color 0.3s ease;
     background: white;
 }
 
@@ -323,196 +247,355 @@ textarea:focus-visible {
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
+/* --- Calculate Button --- */
 .calculate-btn {
     width: 100%;
-    padding: 18px;
+    padding: 14px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
     border-radius: 10px;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .calculate-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
 }
 
-.results {
-    margin-top: 30px;
+/* --- Reverse Link --- */
+.reverse-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: rgba(255,255,255,0.9);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
 }
 
-.results h4 {
-    color: #4a5568;
-    margin-bottom: 20px;
-    font-size: 1.3rem;
-}
+.reverse-link:hover { color: white; }
+
+/* --- Results --- */
+.results { margin-top: 20px; }
 
 .result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background: #f7fafc;
     border-left: 4px solid #667eea;
-    padding: 20px;
-    margin-bottom: 15px;
+    padding: 16px 20px;
+    margin-bottom: 10px;
     border-radius: 0 10px 10px 0;
-    transition: all 0.3s ease;
-}
-
-.result-item:hover {
-    background: #edf2f7;
-    transform: translateX(5px);
 }
 
 .result-item.recommended {
     background: #e6fffa;
     border-left-color: #38b2ac;
-    box-shadow: 0 5px 15px rgba(56, 178, 172, 0.1);
-    position: relative;
-}
-
-.result-item.recommended::after {
-    content: '⭐ 推荐';
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: #38b2ac;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    font-weight: bold;
 }
 
 .result-time {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: #2d3748;
-    margin-bottom: 5px;
+    display: block;
 }
 
 .result-cycles {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #718096;
 }
 
-/* 建议区域 */
-.tips {
+.rec-badge {
+    background: #38b2ac;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.quality-note {
+    margin-top: 15px;
+    color: #718096;
+    font-size: 0.9rem;
     text-align: center;
-    background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%);
+    line-height: 1.5;
 }
 
-.tips p {
-    color: #2d3748;
-    font-size: 1.1rem;
-    font-style: italic;
+.quality-note a {
+    color: #667eea;
+    text-decoration: underline;
 }
 
-/* 博客预览 */
-.blog-preview h2 {
+/* --- Section Titles --- */
+.section-title {
     text-align: center;
     color: #4a5568;
-    margin-bottom: 50px;
-    font-size: 2.5rem;
+    margin-bottom: 12px;
+    font-size: 2rem;
+}
+
+.section-desc {
+    text-align: center;
+    color: #718096;
+    margin-bottom: 35px;
+    font-size: 1.05rem;
+}
+
+/* --- Ad Section --- */
+.ad-section {
+    padding: 70px 0;
+    background: #fff;
+}
+
+.ad-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.ad-card {
+    background: #f7fafc;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e2e8f0;
+}
+
+.ad-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.ad-icon {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+}
+
+.ad-card h3 {
+    color: #2d3748;
+    margin-bottom: 10px;
+    font-size: 1.15rem;
+}
+
+.ad-card p {
+    color: #718096;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.ad-link {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.ad-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    color: white;
+}
+
+/* --- How It Works --- */
+.how-it-works {
+    padding: 70px 0;
+    background: #f8fafc;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.step {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.step h3 {
+    color: #2d3748;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.step p {
+    color: #718096;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* --- Related Reading --- */
+.related-reading {
+    padding: 70px 0;
+    background: #fff;
 }
 
 .blog-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    gap: 25px;
 }
 
 .blog-card {
     background: white;
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.06);
     transition: transform 0.3s ease;
+    border: 1px solid #e2e8f0;
 }
 
-.blog-card:hover {
-    transform: translateY(-5px);
-}
+.blog-card:hover { transform: translateY(-4px); }
 
 .blog-card h3 {
     color: #4a5568;
-    margin-bottom: 15px;
-    font-size: 1.3rem;
+    margin-bottom: 10px;
+    font-size: 1.15rem;
 }
 
 .blog-card p {
     color: #718096;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     line-height: 1.6;
+    font-size: 0.92rem;
 }
 
 .blog-card a {
     color: #667eea;
     text-decoration: none;
     font-weight: 600;
-    transition: color 0.3s ease;
+    font-size: 0.92rem;
 }
 
-.blog-card a:hover {
-    color: #5a67d8;
-}
+.blog-card a:hover { color: #5a67d8; }
 
 .blog-more {
     text-align: center;
-    margin-top: 40px;
+    margin-top: 35px;
 }
 
 .more-articles-btn {
     display: inline-block;
-    padding: 15px 30px;
+    padding: 13px 28px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     text-decoration: none;
-    border-radius: 10px;
+    border-radius: 8px;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
 }
 
 .more-articles-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
 }
 
-/* 页脚 */
+/* --- Shared: info-card (used by about/contact pages) --- */
+.info-card {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.info-card h3 { color: #4a5568; margin-bottom: 20px; font-size: 1.5rem; }
+
+.info-card ul { list-style: none; }
+
+.info-card li {
+    padding: 10px 0;
+    padding-left: 30px;
+    position: relative;
+    color: #718096;
+    line-height: 1.6;
+}
+
+.info-card li::before {
+    content: '\2713';
+    position: absolute;
+    left: 0;
+    color: #38b2ac;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* --- Footer --- */
 .footer {
     background: #2d3748;
     color: white;
-    text-align: center;
-    padding: 40px 0;
+    padding: 35px 0;
 }
 
-.footer p {
-    opacity: 0.8;
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
-/* 移动端优化 - 小屏幕 */
+.footer p { opacity: 0.8; font-size: 0.9rem; }
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-links a {
+    color: #718096;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover { color: white; }
+
+/* ===================== */
+/*  RESPONSIVE STYLES    */
+/* ===================== */
+
+/* Small phones */
 @media (max-width: 480px) {
-    .container {
-        padding: 0 10px;
-    }
-    
-    .nav-container {
-        padding: 0 15px;
-        height: 60px;
-    }
-    
-    .nav-logo h2 {
-        font-size: 1.2rem;
-    }
-    
-    .mobile-menu-btn {
-        display: flex;
-    }
-    
+    .container { padding: 0 14px; }
+
+    .nav-container { padding: 0 15px; height: 60px; }
+    .nav-logo h2 { font-size: 1.2rem; }
+
+    .mobile-menu-btn { display: flex; }
+
     .nav-menu {
         position: fixed;
         top: 60px;
@@ -528,410 +611,113 @@ textarea:focus-visible {
         transition: left 0.3s ease;
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
-    
-    .nav-menu.active {
-        left: 0;
-    }
-    
-    .nav-menu li {
-        width: 100%;
-        text-align: center;
-    }
-    
+
+    .nav-menu.active { left: 0; }
+
+    .nav-menu li { width: 100%; text-align: center; }
+
     .nav-menu a {
         display: block;
         padding: 15px 20px;
         font-size: 1.1rem;
         border-bottom: 1px solid #f0f0f0;
     }
-    
-    .hero {
-        padding: 120px 0 60px;
+
+    .calculator-hero {
+        padding: 110px 0 40px;
         margin-top: 60px;
     }
-    
-    .hero h1 {
-        font-size: 1.8rem;
-        margin-bottom: 15px;
-    }
-    
-    .hero-subtitle {
-        font-size: 1rem;
-        margin-bottom: 25px;
-    }
-    
-    .cta-button {
-        padding: 12px 25px;
-        font-size: 0.9rem;
-    }
-    
-    .info-section, .calculator-section, .tips-section, .blog-preview {
-        padding: 40px 0;
-    }
-    
-    .info-card, .calculator, .tips {
-        padding: 25px 20px;
-        margin-bottom: 20px;
-    }
-    
-    .calculator-section h2 {
-        font-size: 1.8rem;
-        margin-bottom: 30px;
-    }
-    
-    .tabs {
-        flex-direction: column;
-        gap: 0;
-    }
-    
-    .tab-btn {
-        padding: 12px 15px;
-        font-size: 0.9rem;
-    }
-    
-    .current-time {
-        padding: 20px 15px;
-    }
-    
-    .current-time h3 {
-        font-size: 1.1rem;
-    }
-    
-    .input-group label {
-        font-size: 0.9rem;
-    }
-    
-    .calculate-btn {
-        padding: 12px 20px;
-        font-size: 0.9rem;
-    }
-    
-    .result-item {
-        padding: 12px 15px;
-        margin-bottom: 8px;
-    }
-    
-    .result-time {
-        font-size: 1.1rem;
-    }
-    
-    .result-cycles {
-        font-size: 0.8rem;
-    }
-    
-    .blog-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .blog-card {
-        padding: 20px;
-    }
-    
-    .blog-card h3 {
-        font-size: 1.1rem;
-    }
+
+    .calculator-hero h1 { font-size: 1.7rem; }
+    .calculator-hero .hero-subtitle { font-size: 0.9rem; margin-bottom: 25px; }
+
+    .calculator-card { padding: 22px 16px; border-radius: 12px; }
+
+    .tabs { flex-direction: column; gap: 0; }
+    .tab-btn { padding: 12px 15px; font-size: 0.9rem; }
+
+    .current-time-value { font-size: 1.8rem; }
+
+    .result-item { padding: 14px 16px; }
+    .result-time { font-size: 1.1rem; }
+    .result-cycles { font-size: 0.8rem; }
+    .rec-badge { font-size: 0.7rem; padding: 3px 10px; }
+
+    .ad-section, .how-it-works, .related-reading { padding: 40px 0; }
+
+    .section-title { font-size: 1.5rem; }
+
+    .ad-grid, .steps, .blog-grid { grid-template-columns: 1fr; gap: 18px; }
+    .ad-card, .step, .blog-card { padding: 22px; }
+
+    .footer-content { flex-direction: column; text-align: center; }
+    .footer-links { margin-top: 10px; }
 }
 
-/* 平板设备 */
+/* Tablets */
 @media (min-width: 481px) and (max-width: 768px) {
-    .container {
-        padding: 0 15px;
-    }
-    
-    .nav-menu {
-        gap: 20px;
-    }
-    
-    .nav-menu a {
-        font-size: 0.9rem;
-    }
-    
-    .hero h1 {
-        font-size: 2.2rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.2rem;
-    }
-    
-    .info-section, .calculator-section, .tips-section, .blog-preview {
-        padding: 60px 0;
-    }
-    
-    .info-card, .calculator, .tips {
-        padding: 30px;
-    }
-    
-    .calculator-section h2 {
-        font-size: 2.2rem;
-    }
-    
-    .blog-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
+    .container { padding: 0 18px; }
+
+    .nav-menu { gap: 20px; }
+    .nav-menu a { font-size: 0.9rem; }
+
+    .calculator-hero { padding: 120px 0 50px; }
+    .calculator-hero h1 { font-size: 2.2rem; }
+
+    .calculator-card { padding: 28px; }
+
+    .ad-grid, .steps, .blog-grid { grid-template-columns: 1fr; gap: 22px; }
+
+    .section-title { font-size: 1.8rem; }
 }
 
-/* 大屏幕优化 */
+/* Large screens */
 @media (min-width: 1200px) {
-    .hero h1 {
-        font-size: 3.5rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.4rem;
-    }
-    
-    .calculator-section h2 {
-        font-size: 2.8rem;
-    }
-    
-    .blog-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+    .calculator-hero h1 { font-size: 3.2rem; }
+    .calculator-card { max-width: 660px; }
 }
 
-/* 触摸设备优化 */
+/* Touch devices */
 @media (hover: none) and (pointer: coarse) {
-    .tab-btn, .calculate-btn, .cta-button {
+    .tab-btn, .calculate-btn, .ad-link, .more-articles-btn {
         min-height: 44px;
         min-width: 44px;
     }
-    
-    .nav-menu a {
-        padding: 10px;
-    }
-    
+
     .result-item {
         min-height: 60px;
         display: flex;
         align-items: center;
     }
-    
-    /* 增加点击区域 */
-    .blog-card a {
-        display: block;
-        padding: 8px 0;
-    }
 }
 
-/* 高对比度模式支持 */
+/* High contrast */
 @media (prefers-contrast: high) {
-    .hero {
-        background: #000;
-        color: #fff;
-    }
-    
-    .cta-button {
-        border: 2px solid #fff;
-        background: transparent;
-    }
-    
-    .tab-btn.active {
-        background: #000;
-        color: #fff;
-        border: 2px solid #fff;
-    }
+    .calculator-hero { background: #000; color: #fff; }
+    .tab-btn.active { background: #000; color: #fff; border: 2px solid #fff; }
 }
 
-/* 减少动画偏好 */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-    
-    html {
-        scroll-behavior: auto;
-    }
+    * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    html { scroll-behavior: auto; }
 }
 
-/* 滚动行为 */
-html {
-    scroll-behavior: smooth;
-}
-
-/* 时区选择器 */
-.timezone-selector {
-    margin: 15px 0;
-}
-
-.timezone-selector label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: #4a5568;
-}
-
-.timezone-selector select {
+/* Shared form styles for sub-pages */
+.form-input {
     width: 100%;
-    padding: 10px 15px;
+    padding: 12px 15px;
     border: 2px solid #e2e8f0;
     border-radius: 8px;
-    font-size: 14px;
-    background: white;
-}
-
-/* 睡眠计划设置 */
-.schedule-settings {
-    background: #f8fafc;
-    padding: 25px;
-    border-radius: 15px;
-    margin-bottom: 20px;
-}
-
-.schedule-settings h3 {
-    color: #2d3748;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.schedule-mode {
-    margin-bottom: 25px;
-}
-
-.schedule-mode > label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: 600;
-    color: #4a5568;
-}
-
-.mode-selector {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.mode-selector input[type="radio"] {
-    margin-right: 8px;
-}
-
-.mode-selector label {
-    font-weight: 400;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-}
-
-.schedule-group {
-    margin-top: 20px;
-}
-
-.weekday-weekend-settings {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    margin-top: 20px;
-}
-
-.weekday-settings,
-.weekend-settings {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.weekday-settings h4,
-.weekend-settings h4 {
-    color: #2d3748;
     margin-bottom: 15px;
-    text-align: center;
-    font-size: 1.1rem;
 }
 
-/* 睡眠质量评分 */
-.sleep-quality-score {
-    background: linear-gradient(135deg, #38b2ac, #319795);
+.tool-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 20px;
-    border-radius: 15px;
-    margin: 20px 0;
-    text-align: center;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
 }
-
-.quality-score {
-    font-size: 3rem;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.quality-description {
-    font-size: 1.1rem;
-    margin-bottom: 15px;
-}
-
-.quality-factors {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.quality-factor {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 15px;
-    border-radius: 10px;
-    text-align: left;
-}
-
-.factor-name {
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.factor-score {
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-/* 睡眠建议 */
-.sleep-recommendations {
-    background: #edf2f7;
-    padding: 20px;
-    border-radius: 12px;
-    margin-top: 20px;
-}
-
-.sleep-recommendations h4 {
-    color: #2d3748;
-    margin-bottom: 15px;
-}
-
-.recommendations-list {
-    list-style: none;
-}
-
-.recommendations-list li {
-    padding: 8px 0;
-    border-bottom: 1px solid #cbd5e0;
-    color: #4a5568;
-}
-
-.recommendations-list li:last-child {
-    border-bottom: none;
-}
-
-.recommendations-list li::before {
-    content: "💡 ";
-    margin-right: 8px;
-}
-
-/* 响应式设计 - 睡眠计划 */
-@media (max-width: 768px) {
-    .weekday-weekend-settings {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .schedule-settings {
-        padding: 20px;
-    }
-    
-    .quality-factors {
-        grid-template-columns: 1fr;
-    }
-} 
